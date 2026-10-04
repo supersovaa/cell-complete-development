@@ -105,7 +105,7 @@ Mocks, stubs, fixtures, and similar test doubles may still be used for dependenc
 A dedicated one-to-one test case or test file for every cell is not required.
 The formal test suite as a whole may provide sufficient coverage.
 
-When behavior emerges only from combining multiple cells, add formal coverage once every participating cell is either already complete or at its final completion stage.
+When behavior emerges only from combining multiple cells, the cell implemented later owns the formal coverage that becomes applicable when it makes that combined behavior available.
 
 A cell is complete only when:
 
