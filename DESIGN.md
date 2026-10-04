@@ -36,11 +36,17 @@ Model that diagonal progress as waves. For example:
 - wave 2: A2 and B1;
 - wave 3: A3, B2, and C1.
 
-Here A, B, and C are cells; numbered items are partial implementation work within those cells.
+Here A, B, and C are cells; numbered items are partial implementation stages within those cells.
 
 Each wave is a synchronization boundary. Complete all work in the current wave before beginning the next wave.
 
-Use staircase-shaped diagonal progress as the default wave structure: advance each active cell by roughly one implementation stage per wave while introducing new cells progressively, rather than finishing one cell vertically before beginning the next.
+Use staircase-shaped diagonal progress as the default wave structure. Advance an active cell by at most one implementation stage in a wave, while progressively introducing additional cells whose first stage is executable.
+
+A new cell may enter any wave when its first stage is executable and the wave can satisfy dependency and shared-part exclusivity constraints. No existing cell needs to complete before another cell is introduced.
+
+A cell whose next stage conflicts with work selected for the current wave may skip that wave. Other cells continue. Resume the skipped cell in a later wave when its next stage can run safely.
+
+Do not impose a fixed maximum number of active cells. When contention makes additional concurrency counterproductive, suppress new cell introduction or skip conflicting cells rather than exceeding safe parallelism.
 
 Among implementable cells, prefer lighter cells when useful, without prescribing a detailed weighting or scheduling algorithm.
 
