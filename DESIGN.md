@@ -88,15 +88,16 @@ They may directly verify cell-specific internals, shared parts, or partial combi
 
 Temporary tests must be identifiable as temporary through a repository-appropriate convention.
 
-When a cell becomes complete, move its durable behavioral guarantee to formal tests using completed cells.
+When a cell becomes complete, move its durable behavioral guarantee to formal tests using real repository cells.
 Remove temporary tests whose role has been transferred to that formal coverage.
 Temporary tests that remain necessary for other incomplete-cell work may remain.
 
 ## Formal tests and completion
 
-Formal tests verify observable required behavior of completed cells rather than freezing internal implementation structure.
+Formal tests verify observable required behavior at cell completion boundaries rather than freezing internal implementation structure.
 
-Formal tests must use cells that actually exist as completed repository entities.
+Formal tests must use cells that actually exist as repository entities.
+A cell currently being completed may be used in those tests before its completion status is finalized.
 Do not create fictional or test-only cells merely to make a formal test convenient.
 
 Mocks, stubs, fixtures, and similar test doubles may still be used for dependencies that are not cells.
@@ -104,12 +105,12 @@ Mocks, stubs, fixtures, and similar test doubles may still be used for dependenc
 A dedicated one-to-one test case or test file for every cell is not required.
 The formal test suite as a whole may provide sufficient coverage.
 
-When behavior emerges only from combining multiple cells, add formal coverage once all participating cells are complete.
+When behavior emerges only from combining multiple cells, add formal coverage once every participating cell is either already complete or at its final completion stage.
 
 A cell is complete only when:
 
 - all behavior required of the cell is implemented;
-- its observable required behavior is covered by formal tests using completed cells;
+- its observable required behavior is covered by formal tests using real repository cells, including the cell being completed;
 - obsolete temporary tests have been removed; and
 - the full automated test suite passes, preserving previously completed cells.
 
