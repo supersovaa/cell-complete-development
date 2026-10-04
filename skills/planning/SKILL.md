@@ -68,9 +68,9 @@ The final stage plan for a cell must make cell completion explicit.
 Its completion criteria must require:
 
 - all behavior required of the cell to be implemented;
-- the cell's observable required behavior to be covered by formal tests using real completed cells;
+- the cell's observable required behavior to be covered by formal tests using real repository cells, including the cell being completed;
 - obsolete temporary tests whose role has moved to formal cell-level verification to be removed;
-- newly established behavior that depends on combinations of completed cells to receive formal coverage when applicable; and
+- newly established behavior that depends on combinations of cells to receive formal coverage once every participating cell is either already complete or at its final completion stage; and
 - the full automated test suite to pass.
 
 Formal coverage does not require one dedicated test case or test file per cell.
