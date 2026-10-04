@@ -40,6 +40,8 @@ Here A, B, and C are cells; numbered items are partial implementation work withi
 
 Each wave is a synchronization boundary. Complete all work in the current wave before beginning the next wave.
 
+Use staircase-shaped diagonal progress as the default wave structure: advance each active cell by roughly one implementation stage per wave while introducing new cells progressively, rather than finishing one cell vertically before beginning the next.
+
 Among implementable cells, prefer lighter cells when useful, without prescribing a detailed weighting or scheduling algorithm.
 
 Do not treat a shared effect, mechanism, helper, or other reusable part as an independent completion target to implement ahead of cells.
