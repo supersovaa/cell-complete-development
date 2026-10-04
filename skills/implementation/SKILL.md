@@ -54,7 +54,7 @@ Do not treat temporary tests as the formal completion guarantee for a cell.
 
 When a stage plan completes its cell, satisfy the cell-completion criteria recorded by planning.
 
-Formal tests must exercise observable required behavior using real completed cells rather than fictional or test-only cells.
+Formal tests must exercise observable required behavior using real repository cells, including the cell being completed, rather than fictional or test-only cells.
 A cell does not need a dedicated one-to-one formal test if the formal suite as a whole covers its required behavior.
 
 Remove temporary tests whose responsibility has been transferred to formal completed-cell coverage.
