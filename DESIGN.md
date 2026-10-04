@@ -30,6 +30,16 @@ Implementation may be decomposed below the cell boundary.
 
 Multiple cells may be implemented in parallel. Work may progress diagonally across cells rather than completing one cell before touching the next.
 
+Model that diagonal progress as waves. For example:
+
+- wave 1: A1;
+- wave 2: A2 and B1;
+- wave 3: A3, B2, and C1.
+
+Here A, B, and C are cells; numbered items are partial implementation work within those cells.
+
+Each wave is a synchronization boundary. Complete all work in the current wave before beginning the next wave.
+
 Among implementable cells, prefer lighter cells when useful, without prescribing a detailed weighting or scheduling algorithm.
 
 Do not treat a shared effect, mechanism, helper, or other reusable part as an independent completion target to implement ahead of cells.
@@ -37,6 +47,8 @@ Do not treat a shared effect, mechanism, helper, or other reusable part as an in
 Shared parts may be created or extracted while implementing currently needed cell behavior. Do not implement extra shared behavior merely in anticipation of future cells.
 
 A part first created while implementing an incomplete cell may be reused by another cell. The originating cell does not need to complete first, and the reusing cell may complete earlier.
+
+Shared parts may be read or reused by multiple concurrent pieces of work when they are not being changed. If one piece of work changes a shared part, treat access to that shared part as exclusive for that wave: no other parallel work in the wave may depend on, read, or modify it.
 
 Partial implementation of an incomplete cell may exist in the canonical repository. It remains incomplete and outside the formal completion guarantee until the cell completion conditions are met.
 
@@ -78,7 +90,7 @@ Refactoring preserves completion when the observable behavior of completed cells
 
 The repository will separate the method by use:
 
-- planning: establish cell boundaries and guide cell selection and parallel progress;
+- planning: establish cell boundaries, select cells, construct conflict-safe waves, and guide diagonal progress;
 - implementation: decompose work below cells, reuse parts, and use temporary tests while progressing toward completion;
 - review: verify completion conditions, formal test coverage, removal of obsolete temporary tests, and regression safety.
 
