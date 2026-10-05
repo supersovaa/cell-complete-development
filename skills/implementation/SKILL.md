@@ -23,6 +23,12 @@ A cell advances by at most one stage in the wave.
 If a stage plan cannot proceed because its boundary becomes invalid, follow the ordinary plan-driven stop and replanning workflow.
 Do not silently pull a later stage of the same cell into the current wave.
 
+## Preserve completed-cell composition in provisional cells
+
+When a stage provisionally places an incomplete cell, derive that cell from its completed composition by removing components that are unnecessary for the current stage.
+Keep every retained component the same in kind and role as it will be in the completed cell.
+Advance the cell by adding omitted components rather than replacing placeholder-only components or temporary substitutes.
+
 ## Preserve shared-part exclusivity
 
 Multiple plans may reuse unchanged shared implementation concurrently.
