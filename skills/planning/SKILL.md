@@ -7,7 +7,7 @@ description: Plan implementation around concrete domain cells as completion boun
 
 Use this skill when a repository defines concrete domain entities as cells and wants implementation to progress across multiple cells without making shared parts independent completion targets.
 
-Use this skill together with the repository's ordinary plan-driven planning rules. Those rules own plan structure, dependencies, readiness, durable state, and general concurrency-conflict recording. This skill adds cell and wave semantics.
+Use this skill together with the repository's ordinary plan-driven planning rules. Those rules own plan structure, dependencies, plan-readiness semantics, durable state, and general concurrency-conflict recording. This skill adds cell and wave semantics.
 
 ## Establish the cell boundary
 
@@ -65,7 +65,7 @@ Before fixing a wave for implementation, inspect every stage plan assigned to th
 Ensure every required test case and expected outcome for those plans' settled completion contracts is recorded using the ordinary planning workflow and repository conventions.
 Do not fix the wave or begin its implementation while any required test definition is missing.
 
-If test design exposes an unresolved requirement, design ambiguity, invalid plan boundary, dependency change, or concurrency conflict, return that issue to its owning workflow before fixing the wave.
+If this audit exposes an unresolved requirement, design ambiguity, invalid plan boundary, dependency change, or concurrency conflict, return that issue to its owning workflow before fixing the wave.
 Otherwise, filling test-definition gaps at this gate does not require reopening already-settled implementation boundaries.
 
 ## Protect shared parts
