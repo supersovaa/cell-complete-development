@@ -80,12 +80,11 @@ The cell remains outside the formal completion guarantee until its completion co
 
 Whether an incomplete cell itself is exposed or usable at runtime is repository-specific.
 
-Before an incomplete cell is provisionally placed, its completed component composition must be determined by the settled requirements and design.
-If that composition is not yet settled, resolve it in the workflow that owns the missing requirement or design decision before planning provisional placement.
-The provisional cell is a reduced form of that completed composition: omit components that are unnecessary at the current stage.
-Components that remain keep the same kind and role they have in the completed composition.
-Progress toward completion adds omitted components instead of replacing placeholder-only components or temporary substitutes.
-Using the completed composition does not freeze the cell's complete future stage sequence.
+A provisionally placed incomplete cell is a reduced form of the completed cell.
+Every component present in the provisional cell also belongs to the completed cell with the same kind and role.
+Components that are unnecessary at the current stage may be omitted.
+Progress toward completion adds components instead of introducing provisional-only components or temporary substitutes that must later be replaced.
+This constrains the components already present without requiring the cell's entire future component set to be fixed in advance.
 
 ## Temporary tests
 
@@ -116,7 +115,6 @@ When behavior emerges only from combining multiple cells, the cell implemented l
 
 A cell is complete only when:
 
-- its component composition matches the completed composition required by the settled requirements and design;
 - all behavior required of the cell is implemented;
 - its observable required behavior is covered by formal tests using real repository cells, including the cell being completed;
 - obsolete temporary tests have been removed; and
