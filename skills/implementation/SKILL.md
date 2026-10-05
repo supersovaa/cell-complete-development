@@ -1,11 +1,11 @@
 ---
 name: cell-complete-implementation
-description: Execute one finalized cell-complete wave by running its cell-stage plans in parallel where allowed, preserving shared-part exclusivity, temporary-test rules, and cell completion boundaries.
+description: Execute one planned cell-complete wave by running its cell-stage plans in parallel where allowed, preserving shared-part exclusivity, temporary-test rules, and cell completion boundaries.
 ---
 
 # Cell-Complete Implementation
 
-Use this skill to execute one already planned and finalized cell-complete wave.
+Use this skill to execute one already planned cell-complete wave.
 
 Use the repository's ordinary plan-driven implementation rules for every stage plan in the wave.
 Those rules own each plan's fixed execution boundary, result recording, completion audit, and replan-required handling.
@@ -14,7 +14,7 @@ This skill adds wave orchestration and cell-specific implementation rules.
 ## Execute one wave
 
 Treat the selected wave as the execution boundary for this orchestration step.
-Assume planning has already completed the wave-finalization check, including all required test definitions for the stage plans in the wave.
+Before execution, confirm that planning completed the required test-definition completeness check when fixing this wave for implementation.
 If that check is incomplete, return to planning instead of beginning implementation.
 
 Execute the wave's stage plans in parallel where their recorded constraints allow it.
