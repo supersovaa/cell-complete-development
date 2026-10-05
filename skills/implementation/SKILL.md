@@ -25,8 +25,8 @@ Do not silently pull a later stage of the same cell into the current wave.
 
 ## Preserve completed-cell composition in provisional cells
 
-When a stage provisionally places an incomplete cell, derive that cell from its completed composition by removing components that are unnecessary for the current stage.
-Keep every retained component the same in kind and role as it will be in the completed cell.
+When a stage provisionally places an incomplete cell, use the completed composition established by planning and omit only components that are unnecessary for the current stage.
+Keep every retained component the same in kind and role as it is in that completed composition.
 Advance the cell by adding omitted components rather than replacing placeholder-only components or temporary substitutes.
 
 ## Preserve shared-part exclusivity
