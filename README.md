@@ -4,8 +4,8 @@ Skills for implementing systems around concrete domain cells: independently iden
 
 ## Skills
 
-- [cell-complete-planning](skills/planning/SKILL.md): decompose cells into plan-backed stages and arrange them into diagonal, conflict-safe waves.
-- [cell-complete-implementation](skills/implementation/SKILL.md): execute one planned wave while preserving plan boundaries, shared-part exclusivity, temporary-test rules, and cell completion conditions.
+- [cell-complete-planning](skills/planning/SKILL.md): decompose cells into plan-backed stages, arrange them into diagonal conflict-safe waves, and audit required test-definition completeness when fixing a wave for implementation.
+- [cell-complete-implementation](skills/implementation/SKILL.md): execute one planned wave after confirming its pre-execution test-definition gate while preserving plan boundaries, shared-part exclusivity, temporary-test rules, and cell completion conditions.
 
 General plan structure, dependency semantics, individual plan execution, and plan-based review remain the responsibility of the corresponding plan-driven skills.
 

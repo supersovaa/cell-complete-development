@@ -1,13 +1,13 @@
 ---
 name: cell-complete-planning
-description: Plan implementation around concrete domain cells as completion boundaries, decompose each cell into plan-backed stages, and arrange those stages into conflict-safe diagonal waves.
+description: Plan implementation around concrete domain cells as completion boundaries, decompose each cell into plan-backed stages, arrange those stages into conflict-safe diagonal waves, and check required test-definition completeness when fixing a wave for implementation.
 ---
 
 # Cell-Complete Planning
 
 Use this skill when a repository defines concrete domain entities as cells and wants implementation to progress across multiple cells without making shared parts independent completion targets.
 
-Use this skill together with the repository's ordinary plan-driven planning rules. Those rules own plan structure, dependencies, readiness, durable state, and general concurrency-conflict recording. This skill adds cell and wave semantics.
+Use this skill together with the repository's ordinary plan-driven planning rules. Those rules own plan structure, dependencies, plan-readiness semantics, durable state, and general concurrency-conflict recording. This skill adds cell and wave semantics.
 
 ## Establish the cell boundary
 
@@ -54,7 +54,19 @@ Use staircase-shaped diagonal progress as the default pattern:
 
 A wave is complete before the next wave begins.
 
-Use ordinary plan readiness and dependency results as inputs to wave construction rather than redefining dependency semantics here.
+Use ordinary plan state and dependency results as inputs to wave construction rather than redefining plan readiness or dependency semantics here.
+
+## Check test completeness when fixing a wave
+
+Required test definitions may be recorded while individual stage plans are created.
+Individual stage-plan review does not audit whether every required test case and expected outcome has been recorded.
+
+Before fixing a wave for implementation, inspect every stage plan assigned to that wave.
+Ensure every required test case and expected outcome for those plans' settled completion contracts is recorded using the ordinary planning workflow and repository conventions.
+Do not fix the wave or begin its implementation while any required test definition is missing.
+
+If this audit exposes an unresolved requirement, design ambiguity, invalid plan boundary, dependency change, or concurrency conflict, return that issue to its owning workflow before fixing the wave.
+Otherwise, filling test-definition gaps at this gate does not require reopening already-settled implementation boundaries.
 
 ## Protect shared parts
 
@@ -83,6 +95,6 @@ Formal coverage does not require one dedicated test case or test file per cell.
 Do not require fictional or test-only cells for formal tests.
 Mocks, stubs, fixtures, and similar test doubles remain available for dependencies that are not cells.
 
-This skill owns cell decomposition, cell-stage plan creation, and wave construction.
+This skill owns cell decomposition, cell-stage plan creation, wave construction, and required test-definition completeness checking when fixing a wave for implementation.
 General plan semantics belong to the ordinary planning workflow.
 Wave execution belongs to cell-complete implementation.

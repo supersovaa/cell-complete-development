@@ -56,8 +56,13 @@ When contention becomes high, reduce new cell introduction or let conflicting ce
 
 Among viable cells, prefer lighter cells when useful, without prescribing a detailed scoring algorithm.
 
-Dependency semantics, dependency recording, and plan readiness belong to the ordinary plan workflow.
-Cell-complete planning consumes those results when constructing waves.
+Dependency semantics, dependency recording, plan state, and plan-readiness semantics belong to the ordinary plan workflow.
+Cell-complete planning consumes plan state and dependency results when constructing waves.
+
+When a wave is being fixed for implementation, cell-complete planning acts as the coordinating pre-execution gate for that wave.
+Before fixing it, audit every assigned stage plan's settled completion contract and ensure every required test case and expected outcome is recorded through the ordinary planning workflow.
+Do not fix or execute the wave while any required test definition is missing.
+If that audit exposes an unresolved requirement, design ambiguity, invalid plan boundary, dependency change, or concurrency conflict, return it to its owning workflow before fixing the wave.
 
 ## Shared parts
 
@@ -132,8 +137,8 @@ Completion is preserved when completed-cell behavior remains formally covered an
 
 This repository provides two skills:
 
-- planning: establish cell boundaries, decompose cells into stage plans, and construct conflict-safe diagonal waves;
-- implementation: execute one planned wave while preserving plan boundaries, shared-part exclusivity, temporary-test rules, and cell completion conditions.
+- planning: establish cell boundaries, decompose cells into stage plans, construct conflict-safe diagonal waves, and audit required test-definition completeness when fixing a wave for implementation;
+- implementation: execute one planned wave after that pre-execution gate while preserving plan boundaries, shared-part exclusivity, temporary-test rules, and cell completion conditions.
 
 A cell-specific review skill is unnecessary.
 Review remains plan-based and is handled by the ordinary review workflow using the completion criteria created during cell-complete planning.

@@ -14,6 +14,8 @@ This skill adds wave orchestration and cell-specific implementation rules.
 ## Execute one wave
 
 Treat the selected wave as the execution boundary for this orchestration step.
+Before execution, confirm that planning completed the required test-definition completeness check when fixing this wave for implementation.
+If that check is incomplete, return to planning instead of beginning implementation.
 
 Execute the wave's stage plans in parallel where their recorded constraints allow it.
 Do not start work from a later wave before every plan attempt in the current wave has finished its current attempt.
