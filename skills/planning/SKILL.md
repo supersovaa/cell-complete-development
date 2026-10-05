@@ -1,6 +1,6 @@
 ---
 name: cell-complete-planning
-description: Plan implementation around concrete domain cells as completion boundaries, decompose each cell into plan-backed stages, arrange those stages into conflict-safe diagonal waves, and check required test-design completeness when fixing a wave for implementation.
+description: Plan implementation around concrete domain cells as completion boundaries, decompose each cell into plan-backed stages, arrange those stages into conflict-safe diagonal waves, and check required test-definition completeness when fixing a wave for implementation.
 ---
 
 # Cell-Complete Planning
@@ -62,7 +62,7 @@ Required test definitions may be recorded while individual stage plans are creat
 Individual stage-plan review does not audit whether every required test case and expected outcome has been recorded.
 
 Before fixing a wave for implementation, inspect every stage plan assigned to that wave.
-Complete every test case and expected outcome required by those plans' settled completion contracts, using the ordinary planning workflow and repository conventions.
+Ensure every required test case and expected outcome for those plans' settled completion contracts is recorded using the ordinary planning workflow and repository conventions.
 Do not fix the wave or begin its implementation while any required test definition is missing.
 
 If test design exposes an unresolved requirement, design ambiguity, invalid plan boundary, dependency change, or concurrency conflict, return that issue to its owning workflow before fixing the wave.
