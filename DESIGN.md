@@ -57,7 +57,7 @@ When contention becomes high, reduce new cell introduction or let conflicting ce
 Among viable cells, prefer lighter cells when useful, without prescribing a detailed scoring algorithm.
 
 Dependency semantics, dependency recording, plan state, and plan-readiness semantics belong to the ordinary plan workflow.
-Cell-complete planning consumes plan state and dependency results when constructing waves, then owns the wave-level required test-definition completeness audit when the wave is fixed for implementation.
+Cell-complete planning consumes plan state and dependency results when constructing waves.
 
 When a wave is being fixed for implementation, cell-complete planning acts as the coordinating pre-execution gate for that wave.
 Before fixing it, audit every assigned stage plan's settled completion contract and ensure every required test case and expected outcome is recorded through the ordinary planning workflow.
