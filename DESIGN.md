@@ -80,6 +80,12 @@ The cell remains outside the formal completion guarantee until its completion co
 
 Whether an incomplete cell itself is exposed or usable at runtime is repository-specific.
 
+A provisionally placed incomplete cell is a reduced form of the completed cell.
+Every component present in the provisional cell also belongs to the completed cell with the same kind and role.
+Components that are unnecessary at the current stage may be omitted.
+Progress toward completion adds components instead of introducing provisional-only components or temporary substitutes that must later be replaced.
+This constrains the components already present without requiring the cell's entire future component set to be fixed in advance.
+
 ## Temporary tests
 
 Temporary tests are allowed while a cell is incomplete.
