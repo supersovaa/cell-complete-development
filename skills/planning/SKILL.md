@@ -1,6 +1,6 @@
 ---
 name: cell-complete-planning
-description: Plan implementation around concrete domain cells as completion boundaries, decompose each cell into plan-backed stages, and arrange those stages into conflict-safe diagonal waves.
+description: Plan implementation around concrete domain cells as completion boundaries, decompose each cell into plan-backed stages, arrange those stages into conflict-safe diagonal waves, and finalize each wave only after its required test design is complete.
 ---
 
 # Cell-Complete Planning
@@ -55,6 +55,18 @@ Use staircase-shaped diagonal progress as the default pattern:
 A wave is complete before the next wave begins.
 
 Use ordinary plan readiness and dependency results as inputs to wave construction rather than redefining dependency semantics here.
+
+## Finalize a wave before implementation
+
+Individual stage plans may be created and reviewed before every required test case and expected outcome has been defined.
+Do not treat missing test definitions alone as a reason to reject an otherwise valid individual stage plan.
+
+Before fixing a wave for implementation, inspect every stage plan assigned to that wave.
+Complete every test case and expected outcome required by those plans' settled completion contracts, using the ordinary planning workflow and repository conventions.
+Do not fix the wave or begin its implementation while any required test definition is missing.
+
+If test design exposes an unresolved requirement, design ambiguity, invalid plan boundary, dependency change, or concurrency conflict, return that issue to its owning workflow before fixing the wave.
+Otherwise, filling test-definition gaps at this gate does not require reopening already-settled implementation boundaries.
 
 ## Protect shared parts
 
