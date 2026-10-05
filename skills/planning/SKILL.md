@@ -95,6 +95,6 @@ Formal coverage does not require one dedicated test case or test file per cell.
 Do not require fictional or test-only cells for formal tests.
 Mocks, stubs, fixtures, and similar test doubles remain available for dependencies that are not cells.
 
-This skill owns cell decomposition, cell-stage plan creation, and wave construction.
+This skill owns cell decomposition, cell-stage plan creation, wave construction, and required test-definition completeness checking when fixing a wave for implementation.
 General plan semantics belong to the ordinary planning workflow.
 Wave execution belongs to cell-complete implementation.
