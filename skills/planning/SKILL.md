@@ -54,7 +54,7 @@ Use staircase-shaped diagonal progress as the default pattern:
 
 A wave is complete before the next wave begins.
 
-Use ordinary plan readiness and dependency results as inputs to wave construction rather than redefining dependency semantics here.
+Use ordinary plan state and dependency results as inputs to wave construction rather than redefining plan readiness or dependency semantics here.
 
 ## Check test completeness when fixing a wave
 
