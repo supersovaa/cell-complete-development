@@ -23,6 +23,10 @@ Decompose each cell into stages that each establish one concrete partial result 
 Represent every stage as exactly one implementation plan.
 Each implementation plan belongs to exactly one stage of exactly one cell.
 
+When a stage provisionally places an incomplete cell, plan that cell as a reduced form of its completed composition.
+Omit only components that are unnecessary at that stage, and preserve the completed-cell kind and role of every component that remains.
+Completion should add omitted components rather than replace placeholder-only components or temporary substitutes.
+
 Do not create a cell-independent plan merely to implement a shared effect, helper, mechanism, or reusable abstraction.
 A cell-stage plan may create, change, or extract shared implementation when that change is required to establish the stage result.
 
