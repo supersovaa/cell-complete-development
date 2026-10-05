@@ -23,12 +23,10 @@ Decompose each cell into stages that each establish one concrete partial result 
 Represent every stage as exactly one implementation plan.
 Each implementation plan belongs to exactly one stage of exactly one cell.
 
-Before a stage provisionally places an incomplete cell, identify the completed component composition from settled requirements, design, and repository state.
-If that composition is not settled enough to identify, return the unresolved decision to its owning workflow before planning the provisional placement.
-Plan the provisional cell by omitting only components that are unnecessary at that stage.
-Every retained component must have the same kind and role it has in the completed composition.
-Plan later stages to add omitted components rather than replace placeholder-only components or temporary substitutes.
-Using the completed composition does not freeze the cell's complete future stage sequence.
+When a stage provisionally places an incomplete cell, plan it as a reduced form of the completed cell.
+Every component included in the provisional cell must also belong to the completed cell with the same kind and role.
+Omit components that are unnecessary at that stage, and plan later stages to extend the cell by adding components rather than replacing provisional-only components or temporary substitutes.
+Do not require the cell's entire future component set to be fixed solely to permit provisional placement.
 
 Do not create a cell-independent plan merely to implement a shared effect, helper, mechanism, or reusable abstraction.
 A cell-stage plan may create, change, or extract shared implementation when that change is required to establish the stage result.
@@ -74,7 +72,6 @@ The final stage plan for a cell must make cell completion explicit.
 
 Its completion criteria must require:
 
-- the cell's component composition to match the completed composition identified from settled requirements and design;
 - all behavior required of the cell to be implemented;
 - the cell's observable required behavior to be covered by formal tests using real repository cells, including the cell being completed;
 - obsolete temporary tests whose role has moved to formal cell-level verification to be removed;
