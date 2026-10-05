@@ -60,7 +60,7 @@ Dependency semantics, dependency recording, and plan readiness belong to the ord
 Cell-complete planning consumes those results when constructing waves.
 
 When a wave is being fixed for implementation, cell-complete planning acts as the coordinating pre-execution gate for that wave.
-Before fixing it, audit every assigned stage plan's settled completion contract and complete every required test case and expected outcome through the ordinary planning workflow.
+Before fixing it, audit every assigned stage plan's settled completion contract and ensure every required test case and expected outcome is recorded through the ordinary planning workflow.
 Do not fix or execute the wave while any required test definition is missing.
 If that audit exposes an unresolved requirement, design ambiguity, invalid plan boundary, dependency change, or concurrency conflict, return it to its owning workflow before fixing the wave.
 
