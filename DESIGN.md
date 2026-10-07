@@ -26,8 +26,8 @@ Plan one cell at a time.
 Decompose the cell into implementation plans that each establish one concrete partial result toward completing that cell.
 One such plan belongs to exactly one cell.
 
-During this pass, inspect and record only prerequisite relations between plans of the same cell.
-Do not treat the ordinary repository-wide direct-dependency set as complete yet.
+During this pass, determine and record only the intra-cell subset of direct dependencies using the ordinary dependency semantics.
+Do not treat the repository-wide direct-dependency set as complete yet.
 Do not perform repository-wide dependency analysis, compare the cell with other cells, or assign its plans to waves.
 
 A plan produced by this pass is wave-unassigned until global wave planning places it.
