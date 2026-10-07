@@ -27,6 +27,7 @@ Plan multiple future waves when known dependencies and conflicts support those p
 Leave a cell plan wave-unassigned when its global placement is not yet justified.
 
 Future wave assignments may be revised until their wave is fixed for implementation.
+Only plans in a fixed wave are eligible for implementation through the cell-complete workflow.
 
 Use staircase-shaped diagonal progress as the default pattern:
 
