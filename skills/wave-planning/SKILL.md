@@ -27,16 +27,17 @@ Assign supported cell plans to synchronized waves and persist each assignment in
 Plan multiple future waves when known dependencies and conflicts support those placements.
 Keep an explicit unassigned value for a cell plan whose global placement is not yet justified.
 
-Record whether an assigned wave is future or fixed using the repository's existing wave convention; when none exists, keep that fixedness beside the wave assignment in the authoritative implementation index.
+Record each wave's status as future or fixed using the repository's existing wave convention; when none exists, keep one authoritative status record per wave in the implementation index.
+Do not duplicate wave fixedness as mutable per-plan state.
 Future wave assignments may be revised until their wave is fixed for implementation.
 Only plans in a fixed wave are eligible for implementation through the cell-complete workflow.
 
 Use staircase-shaped diagonal progress as the default pattern:
 
 - a cell contributes at most one plan to a wave;
-- additional cells may enter later waves when their first unassigned plan can be placed;
+- additional cells may enter later waves when at least one of their wave-unassigned plans is eligible for placement;
 - no existing cell must complete before another cell enters;
-- a cell may skip a wave when its next plan cannot safely run in that wave;
+- a cell may skip a wave when none of its eligible plans can safely run in that wave;
 - a wave completes before the next wave begins.
 
 Use ordinary plan state and dependency results as inputs to wave construction rather than redefining plan readiness or dependency semantics here.
