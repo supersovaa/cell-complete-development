@@ -46,6 +46,16 @@ Omit components that are unnecessary at that point, and plan later work to exten
 
 Keep enough future cell-local structure to guide implementation, but do not invent plan boundaries that available facts do not yet support.
 
+## Inherit deferred formal coverage
+
+When planning a cell, inspect unresolved deferred formal coverage recorded by the repository that could become observable through this cell.
+
+If completing this cell would satisfy a recorded realization condition, assign that deferred coverage to this cell's completing plan. Once assigned, treat it as required observable behavior for completion rather than leaving it deferred because it originated in earlier work.
+
+Do not assign deferred coverage whose realization condition still cannot be satisfied by real repository cells in the planned state. Such coverage remains deferred and does not block completion of unrelated cells.
+
+When the current cell itself requires behavior that cannot be made observable by real repository cells available at completion, allow the cell to complete without fictional or test-only cells only when the applicable domain workflow records that gap as deferred formal coverage.
+
 ## Plan cell completion
 
 The cell plan that completes a cell must make cell completion explicit.
@@ -53,7 +63,7 @@ The cell plan that completes a cell must make cell completion explicit.
 Its completion criteria must require:
 
 - all behavior required of the cell to be implemented;
-- the cell's observable required behavior to be covered by formal tests using real repository cells, including the cell being completed;
+- the cell's observable required behavior, including inherited deferred formal coverage that has become realizable, to be covered by formal tests using real repository cells, including the cell being completed;
 - obsolete temporary tests whose role has moved to formal cell-level verification to be removed;
 - newly established behavior that depends on combinations of cells to receive formal coverage in the completing plan of the cell implemented later, when that cell makes the combined behavior available; and
 - the full automated test suite to pass.
