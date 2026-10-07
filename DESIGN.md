@@ -55,6 +55,7 @@ A cell plan may remain explicitly wave-unassigned when its global placement is n
 
 Persist one authoritative status per wave indicating whether it is future or fixed.
 Keep wave fixedness separate from per-plan wave assignment.
+Keep waves beyond the next execution target in future status and fix only the earliest not-yet-completed wave selected for execution.
 Future wave assignments remain revisable until their wave is fixed for implementation.
 Only plans in a fixed wave are eligible for implementation through the cell-complete workflow.
 
