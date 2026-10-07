@@ -64,6 +64,8 @@ Cell planning does not audit whether every required test case and expected outco
 
 Before fixing a wave for implementation, inspect every cell plan assigned to that wave.
 Ensure every required test case and expected outcome for those plans' settled completion contracts is recorded using the ordinary planning workflow and repository conventions.
+Include deferred formal coverage that cell planning assigned to a completing plan because the cell now makes the case realizable.
+Do not require a current test definition for unresolved deferred formal coverage whose realization condition is still absent.
 Do not fix the wave or begin its implementation while any required test definition is missing.
 
 If this audit exposes an unresolved requirement, design ambiguity, invalid plan boundary, dependency change, or concurrency conflict, return that issue to its owning workflow before fixing the wave.
