@@ -13,6 +13,7 @@ This skill owns repository-wide wave arrangement for cell-complete work.
 
 ## Complete repository-wide dependency analysis
 
+Read cell membership and wave assignment from their authoritative implementation-index records.
 Inspect wave-unassigned and already future-assigned cell plans together with the repository-wide plan graph.
 
 Complete the ordinary planning dependency and concurrency analysis deferred by cell planning.
@@ -22,10 +23,11 @@ If this analysis exposes an unresolved requirement, invalid plan boundary, or in
 
 ## Arrange current and future waves
 
-Assign supported cell plans to synchronized waves.
+Assign supported cell plans to synchronized waves and persist each assignment in the same authoritative record used for cell membership.
 Plan multiple future waves when known dependencies and conflicts support those placements.
-Leave a cell plan wave-unassigned when its global placement is not yet justified.
+Keep an explicit unassigned value for a cell plan whose global placement is not yet justified.
 
+Record whether an assigned wave is future or fixed using the repository's existing wave convention; when none exists, keep that fixedness beside the wave assignment in the authoritative implementation index.
 Future wave assignments may be revised until their wave is fixed for implementation.
 Only plans in a fixed wave are eligible for implementation through the cell-complete workflow.
 
