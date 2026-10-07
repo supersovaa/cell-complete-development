@@ -17,7 +17,7 @@ A cell is a completion and verification boundary, not necessarily a code-ownersh
 
 ## Two-pass planning
 
-Cell-complete planning separates cell-local decomposition from repository-wide wave arrangement.
+Planning is split into two independently invocable skills: cell planning for one-cell decomposition and wave planning for repository-wide arrangement.
 
 ### Cell-local planning
 
@@ -75,9 +75,9 @@ When contention becomes high, reduce new cell introduction or let conflicting ce
 Among viable placements, prefer lighter cells when useful, without prescribing a detailed scoring algorithm.
 
 Dependency semantics, dependency recording, plan state, and plan-readiness semantics belong to the ordinary plan workflow.
-Cell-complete planning changes when repository-wide dependency analysis is performed, not what a dependency means.
+Wave planning changes when repository-wide dependency analysis is performed, not what a dependency means.
 
-When a wave is being fixed for implementation, cell-complete planning acts as the coordinating pre-execution gate for that wave.
+When a wave is being fixed for implementation, wave planning acts as the coordinating pre-execution gate for that wave.
 Before fixing it, audit every assigned cell plan's settled completion contract and ensure every required test case and expected outcome is recorded through the ordinary planning workflow.
 Do not fix or execute the wave while any required test definition is missing.
 If that audit exposes an unresolved requirement, design ambiguity, invalid plan boundary, dependency change, or concurrency conflict, return it to its owning workflow before fixing the wave.
@@ -153,10 +153,11 @@ Completion is preserved when completed-cell behavior remains formally covered an
 
 ## Skill split
 
-This repository provides two skills:
+This repository provides three skills:
 
-- planning: establish cell boundaries, plan cells locally with only intra-cell dependencies, then perform global dependency and conflict analysis to assign cell plans to current and future waves, and audit required test-definition completeness when fixing a wave for implementation;
-- implementation: execute one planned wave after that pre-execution gate while preserving plan boundaries, shared-part exclusivity, temporary-test rules, and cell completion conditions.
+- cell planning: establish one cell boundary, decompose that cell into plans, record intra-cell direct dependencies, and leave those plans wave-unassigned;
+- wave planning: complete repository-wide dependency and concurrency analysis, assign supported cell plans to current and future waves, and audit required test-definition completeness when fixing a wave for implementation;
+- implementation: execute one fixed wave after that pre-execution gate while preserving plan boundaries, shared-part exclusivity, temporary-test rules, and cell completion conditions.
 
 A cell-specific review skill is unnecessary.
-Review remains plan-based and is handled by the ordinary review workflow using the completion criteria created during cell-complete planning.
+Review remains plan-based and is handled by the ordinary review workflow using the completion criteria created during cell planning.
