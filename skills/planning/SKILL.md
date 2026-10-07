@@ -25,8 +25,8 @@ Plan one cell at a time.
 Decompose the cell into implementation plans that each establish one concrete partial result toward completing that cell.
 Each such plan belongs to exactly one cell.
 
-During this pass, inspect and record only prerequisite relations between plans of the same cell.
-Do not treat the ordinary repository-wide direct-dependency set as complete yet.
+During this pass, determine and record only the intra-cell subset of direct dependencies using the ordinary dependency semantics.
+Do not treat the repository-wide direct-dependency set as complete yet.
 Do not perform repository-wide dependency analysis, compare the cell with other cells, or assign its plans to waves.
 
 Leave every plan produced by this pass wave-unassigned.
@@ -108,6 +108,6 @@ Formal coverage does not require one dedicated test case or test file per cell.
 Do not require fictional or test-only cells for formal tests.
 Mocks, stubs, fixtures, and similar test doubles remain available for dependencies that are not cells.
 
-This skill owns cell-local decomposition, the wave-unassigned state between planning passes, global wave construction, and required test-definition completeness checking when fixing a wave for implementation.
+This skill owns cell-local decomposition, the wave-assignment attribute between planning passes, global wave construction, and required test-definition completeness checking when fixing a wave for implementation.
 General plan semantics belong to the ordinary planning workflow.
 Wave execution belongs to cell-complete implementation.
