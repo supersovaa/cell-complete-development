@@ -14,7 +14,7 @@ This skill adds wave orchestration and cell-specific implementation rules.
 ## Execute one wave
 
 Treat the selected wave as the execution boundary for this orchestration step.
-Before execution, confirm that planning completed the required test-definition completeness check when fixing this wave for implementation.
+Before execution, confirm that wave planning completed the required test-definition completeness check when fixing this wave for implementation.
 If that check is incomplete, return to planning instead of beginning implementation.
 
 Execute the wave's cell plans in parallel where their recorded constraints allow it.
@@ -60,7 +60,7 @@ Do not treat temporary tests as the formal completion guarantee for a cell.
 
 ## Complete cells through their completing plan
 
-When a cell plan completes its cell, satisfy the cell-completion criteria recorded by planning.
+When a cell plan completes its cell, satisfy the cell-completion criteria recorded by cell planning.
 
 Formal tests must exercise observable required behavior using real repository cells, including the cell being completed, rather than fictional or test-only cells.
 A cell does not need a dedicated one-to-one formal test if the formal suite as a whole covers its required behavior.
@@ -76,8 +76,8 @@ A cell is not complete when that suite reveals a regression in already completed
 
 Finish every cell-plan attempt in the wave before advancing to the next wave.
 
-After the wave, return changed planning facts, conflicts, or invalidated future assumptions to the planning workflow before executing a later wave.
-Future wave assignments may then be revised where they are not already fixed.
+After the wave, return changed plan boundaries or dependencies to their owning planning workflow and changed wave assumptions to wave planning before executing a later wave.
+Wave planning may then revise future assignments that are not already fixed.
 
 This skill owns execution of one cell-complete wave.
 Individual plan execution semantics belong to the ordinary plan-driven implementation workflow.
