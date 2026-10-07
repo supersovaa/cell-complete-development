@@ -32,6 +32,7 @@ Do not perform repository-wide dependency analysis, compare the cell with other 
 
 A plan produced by this pass is wave-unassigned until global wave planning places it.
 Wave assignment is separate from the ordinary durable plan state; wave-unassigned does not add a new plan state.
+Persist each plan's cell membership and wave assignment in the repository's implementation index so wave planning can consume the cell-local result without rediscovering it.
 Within the cell-complete workflow, a wave-unassigned plan is not selected for implementation.
 
 Do not create an independent plan merely to implement a shared effect, helper, mechanism, or reusable abstraction.
@@ -48,10 +49,11 @@ Before wave assignment, finalize each affected plan's direct dependencies and co
 
 If this global analysis shows that a cell plan's boundary or cell-local dependency structure is invalid, return that plan to the ordinary planning workflow before assigning it.
 
-Assign supported cell plans to synchronized waves.
+Assign supported cell plans to synchronized waves and persist the assignments in the authoritative implementation index.
 Plan multiple future waves when the known dependencies and conflicts are sufficient to do so.
-A cell plan may remain wave-unassigned when its global placement is not yet justified.
+A cell plan may remain explicitly wave-unassigned when its global placement is not yet justified.
 
+Persist whether an assigned wave is future or fixed.
 Future wave assignments remain revisable until their wave is fixed for implementation.
 Only plans in a fixed wave are eligible for implementation through the cell-complete workflow.
 
