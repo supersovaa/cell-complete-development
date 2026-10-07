@@ -28,6 +28,7 @@ Leave repository-wide direct-dependency and concurrency analysis to wave plannin
 
 Leave every plan produced by this phase wave-unassigned.
 Wave assignment is separate from durable plan state; wave-unassigned does not add a new plan state.
+Within the cell-complete workflow, keep a wave-unassigned plan out of implementation selection until wave planning completes repository-wide analysis and fixes a wave containing it.
 
 ## Keep shared implementation subordinate to the cell
 
