@@ -15,25 +15,49 @@ Use an existing repository definition when available; otherwise establish the ce
 
 A cell is a completion and verification boundary, not necessarily a code-ownership, dependency, or implementation boundary.
 
-## Cell stages and plans
+## Two-pass planning
 
-Implementation may be decomposed below the cell boundary.
+Planning is split into two independently invocable skills: cell planning for one-cell decomposition and wave planning for repository-wide arrangement.
 
-Each cell is advanced through stages.
-Each stage establishes one concrete partial result toward completing that cell and corresponds one-to-one with one implementation plan.
+### Cell-local planning
 
-One plan belongs to exactly one stage of exactly one cell.
+Plan one cell at a time.
+
+Decompose the cell into implementation plans that each establish one concrete partial result toward completing that cell.
+One such plan belongs to exactly one cell.
+
+During this pass, determine and record only the intra-cell subset of direct dependencies using the ordinary dependency semantics.
+Do not treat the repository-wide direct-dependency set as complete yet.
+Do not perform repository-wide dependency analysis, compare the cell with other cells, or assign its plans to waves.
+
+A plan produced by this pass is wave-unassigned until global wave planning places it.
+Wave assignment is separate from the ordinary durable plan state; wave-unassigned does not add a new plan state.
+Persist each plan's cell membership and wave assignment in the repository's implementation index so wave planning can consume the cell-local result without rediscovering it.
+Within the cell-complete workflow, a wave-unassigned plan is not selected for implementation.
 
 Do not create an independent plan merely to implement a shared effect, helper, mechanism, or reusable abstraction.
-A cell-stage plan may create, change, or extract shared implementation when that work is required to establish its stage result.
+A cell plan may create, change, or extract shared implementation when that work is required to establish the cell plan's result.
 
-Keep enough future stage structure to guide implementation, but do not freeze the complete stage sequence in advance.
-Later stages may be revised as earlier work establishes new facts.
-Near-term plan fixation remains the responsibility of the ordinary plan workflow.
+Keep enough future cell-local structure to guide later work, but do not invent plans whose boundaries cannot yet be established from available facts.
 
-## Diagonal waves
+### Global wave planning
 
-Arrange cell-stage plans into synchronized waves.
+After cell-local planning, inspect wave-unassigned and already future-assigned cell plans together with the repository-wide plan graph.
+
+Complete the ordinary planning dependency and concurrency analysis that cell-local planning intentionally deferred.
+Before wave assignment, finalize each affected plan's direct dependencies and concurrency constraints, including cross-cell dependencies, dependencies on non-cell work, and conflicts involving shared implementation.
+
+If this global analysis shows that a cell plan's boundary or cell-local dependency structure is invalid, return that plan to the ordinary planning workflow before assigning it.
+
+Assign supported cell plans to synchronized waves and persist the assignments in the authoritative implementation index.
+Plan multiple future waves when the known dependencies and conflicts are sufficient to do so.
+A cell plan may remain explicitly wave-unassigned when its global placement is not yet justified.
+
+Persist one authoritative status per wave indicating whether it is future or fixed.
+Keep wave fixedness separate from per-plan wave assignment.
+Keep waves beyond the next execution target in future status and fix only the earliest not-yet-completed wave selected for execution.
+Future wave assignments remain revisable until their wave is fixed for implementation.
+Only plans in a fixed wave are eligible for implementation through the cell-complete workflow.
 
 A typical progression is:
 
@@ -41,26 +65,26 @@ A typical progression is:
 - wave 2: A2 and B1;
 - wave 3: A3, B2, and C1.
 
-Here A, B, and C are cells, and each numbered item is a stage plan.
+Here A, B, and C are cells, and each numbered item is a cell plan.
 
 Use staircase-shaped diagonal progress as the default:
 
-- an active cell advances by at most one stage in a wave;
-- new cells may enter whenever their first stage is viable;
+- a cell contributes at most one plan to a wave;
+- additional cells may enter later waves when at least one of their wave-unassigned plans is eligible for placement;
 - no existing cell must complete before another cell enters;
-- a cell may skip a wave when its next stage conflicts with selected work;
+- a cell may skip a wave when none of its eligible plans can safely run with selected work;
 - all work in the current wave finishes before the next wave begins.
 
 Do not impose a fixed maximum number of active cells.
 When contention becomes high, reduce new cell introduction or let conflicting cells skip a wave.
 
-Among viable cells, prefer lighter cells when useful, without prescribing a detailed scoring algorithm.
+Among viable placements, prefer lighter cells when useful, without prescribing a detailed scoring algorithm.
 
 Dependency semantics, dependency recording, plan state, and plan-readiness semantics belong to the ordinary plan workflow.
-Cell-complete planning consumes plan state and dependency results when constructing waves.
+Wave planning changes when repository-wide dependency analysis is performed, not what a dependency means.
 
-When a wave is being fixed for implementation, cell-complete planning acts as the coordinating pre-execution gate for that wave.
-Before fixing it, audit every assigned stage plan's settled completion contract and ensure every required test case and expected outcome is recorded through the ordinary planning workflow.
+When a wave is being fixed for implementation, wave planning acts as the coordinating pre-execution gate for that wave.
+Before fixing it, audit every assigned cell plan's settled completion contract and ensure every required test case and expected outcome is recorded through the ordinary planning workflow.
 Do not fix or execute the wave while any required test definition is missing.
 If that audit exposes an unresolved requirement, design ambiguity, invalid plan boundary, dependency change, or concurrency conflict, return it to its owning workflow before fixing the wave.
 
@@ -75,7 +99,7 @@ A part created while one cell is incomplete may be reused by another cell, and t
 
 Unchanged shared parts may be reused by multiple plans in the same wave.
 
-When a stage plan changes a shared part, no other plan in that wave may read, depend on, or modify that shared part.
+When a cell plan changes a shared part, no other plan in that wave may read, depend on, or modify that shared part.
 Represent that mutual exclusion as a concurrency conflict rather than an artificial dependency.
 
 ## Incomplete cells
@@ -85,9 +109,9 @@ The cell remains outside the formal completion guarantee until its completion co
 
 Whether an incomplete cell itself is exposed or usable at runtime is repository-specific.
 
-A provisionally placed incomplete cell is a reduced form of the completed cell.
+When a cell plan provisionally places an incomplete cell, that placement is a reduced form of the completed cell.
 Every component present in the provisional cell also belongs to the completed cell with the same kind and role.
-Components that are unnecessary at the current stage may be omitted.
+Components that are unnecessary at that point may be omitted.
 Progress toward completion adds components instead of introducing provisional-only components or temporary substitutes that must later be replaced.
 This constrains the components already present without requiring the cell's entire future component set to be fixed in advance.
 
@@ -125,7 +149,7 @@ A cell is complete only when:
 - obsolete temporary tests have been removed; and
 - the full automated test suite passes, preserving previously completed cells.
 
-These conditions belong in the completion criteria of the cell's final stage plan so the ordinary plan-based implementation and review workflows can enforce them.
+These conditions belong in the completion criteria of the cell plan that completes the cell so the ordinary plan-based implementation and review workflows can enforce them.
 
 ## Refactoring
 
@@ -135,10 +159,11 @@ Completion is preserved when completed-cell behavior remains formally covered an
 
 ## Skill split
 
-This repository provides two skills:
+This repository provides three skills:
 
-- planning: establish cell boundaries, decompose cells into stage plans, construct conflict-safe diagonal waves, and audit required test-definition completeness when fixing a wave for implementation;
-- implementation: execute one planned wave after that pre-execution gate while preserving plan boundaries, shared-part exclusivity, temporary-test rules, and cell completion conditions.
+- cell planning: establish one cell boundary, decompose that cell into plans, record intra-cell direct dependencies, and leave those plans wave-unassigned;
+- wave planning: complete repository-wide dependency and concurrency analysis, assign supported cell plans to current and future waves, and audit required test-definition completeness when fixing a wave for implementation;
+- implementation: execute one fixed wave after that pre-execution gate while preserving plan boundaries, shared-part exclusivity, temporary-test rules, and cell completion conditions.
 
 A cell-specific review skill is unnecessary.
-Review remains plan-based and is handled by the ordinary review workflow using the completion criteria created during cell-complete planning.
+Review remains plan-based and is handled by the ordinary review workflow using the completion criteria created during cell planning.
