@@ -29,6 +29,8 @@ Keep an explicit unassigned value for a cell plan whose global placement is not 
 
 Record each wave's status as future or fixed using the repository's existing wave convention; when none exists, keep one authoritative status record per wave in the implementation index.
 Do not duplicate wave fixedness as mutable per-plan state.
+Keep assigned waves after the next execution target in future status.
+Fix only the earliest not-yet-completed wave selected for execution.
 Future wave assignments may be revised until their wave is fixed for implementation.
 Only plans in a fixed wave are eligible for implementation through the cell-complete workflow.
 
