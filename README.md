@@ -9,5 +9,6 @@ Skills for implementing systems around concrete domain cells: independently iden
 - [cell-complete-implementation](skills/implementation/SKILL.md): execute one fixed wave while preserving plan boundaries, shared-part exclusivity, temporary-test rules, and cell completion conditions.
 
 General plan structure, dependency semantics, individual plan execution, and plan-based review remain the responsibility of the corresponding plan-driven skills.
+Required test cases, expected outcomes, and other test-evidence planning decisions belong to `test-evidence-planning`; wave planning only requires that planning to be complete before fixing a wave.
 
 See [DESIGN.md](DESIGN.md) for the design rationale and shared terminology.
