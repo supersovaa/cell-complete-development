@@ -26,10 +26,12 @@ Plan one cell at a time.
 Decompose the cell into implementation plans that each establish one concrete partial result toward completing that cell.
 One such plan belongs to exactly one cell.
 
-During this pass, inspect and record only dependencies between plans of the same cell.
+During this pass, inspect and record only prerequisite relations between plans of the same cell.
+Do not treat the ordinary repository-wide direct-dependency set as complete yet.
 Do not perform repository-wide dependency analysis, compare the cell with other cells, or assign its plans to waves.
 
 A plan produced by this pass is wave-unassigned until global wave planning places it.
+Wave assignment is separate from the ordinary durable plan state; wave-unassigned does not add a new plan state.
 
 Do not create an independent plan merely to implement a shared effect, helper, mechanism, or reusable abstraction.
 A cell plan may create, change, or extract shared implementation when that work is required to establish the cell plan's result.
@@ -40,8 +42,8 @@ Keep enough future cell-local structure to guide later work, but do not invent p
 
 After cell-local planning, inspect wave-unassigned and already future-assigned cell plans together with the repository-wide plan graph.
 
-Complete the dependency analysis that cell-local planning intentionally deferred.
-This includes cross-cell dependencies, dependencies on non-cell work, and concurrency conflicts involving shared implementation.
+Complete the ordinary planning dependency and concurrency analysis that cell-local planning intentionally deferred.
+Before wave assignment, finalize each affected plan's direct dependencies and concurrency constraints, including cross-cell dependencies, dependencies on non-cell work, and conflicts involving shared implementation.
 
 If this global analysis shows that a cell plan's boundary or cell-local dependency structure is invalid, return that plan to the ordinary planning workflow before assigning it.
 
