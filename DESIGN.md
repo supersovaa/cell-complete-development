@@ -17,7 +17,7 @@ A cell is a completion and verification boundary, not necessarily a code-ownersh
 
 ## Planning responsibilities
 
-Cell planning and wave planning are independently invocable. When multiple cells need coordination, cross planning may supply cross-cell dependency findings; unrelated eligible work can be arranged without waiting for all other planning to finish.
+Cell planning, cross planning, and wave planning are independently invocable: they handle one-cell decomposition, cross-cell coordination when needed, and plan-level wave arrangement, respectively. Unrelated eligible work can be arranged without waiting for all other planning to finish.
 
 ### Cell-local planning
 
@@ -39,6 +39,22 @@ Do not create an independent plan merely to implement a shared effect, helper, m
 A cell plan may create, change, or extract shared implementation when that work is required to establish the cell plan's result.
 
 Keep enough future cell-local structure to guide later work, but do not invent plans whose boundaries cannot yet be established from available facts.
+
+### Cross-cell planning
+
+When coordination among multiple locally planned cells is needed, compare their planned results without waiting for every cell to be planned or completed.
+
+Establish cross-cell direct dependencies at the specific plan-result boundary that another cell actually requires.
+Do not convert a preferred implementation order into a dependency, and do not require a whole cell to complete when only one of its partial results is required.
+
+Use those dependencies to establish a coarse, revisable implementation order among cells.
+Identify cells that can begin independently, cells that become useful to introduce later, and cells constrained by results from other cells.
+Preserve opportunities for diagonal progress when several orders satisfy the required dependencies.
+
+Record cross-cell dependencies according to the ordinary planning index convention. Record the coarse implementation order in an appropriate existing Markdown planning document, such as that index, separately from required dependencies; no new file or format is needed.
+
+Do not assign wave numbers during this pass.
+If the analysis shows that a cell combines independently establishable results such that the required cross-cell dependency cannot be expressed at the actual result boundary, return that cell to cell planning without stopping unrelated work.
 
 ### Global wave planning
 
@@ -80,7 +96,7 @@ When contention becomes high, reduce new cell introduction or let conflicting ce
 Among viable placements, prefer lighter cells when useful, without prescribing a detailed scoring algorithm.
 
 Dependency semantics, dependency recording, plan state, and plan-readiness semantics belong to the ordinary plan workflow.
-Wave planning uses established dependencies to construct synchronized waves and does not change ordinary dependency semantics.
+Cell planning establishes intra-cell dependencies; cross planning determines needed cross-cell dependencies and coarse order. Wave planning consumes established dependencies and completes concurrency analysis without changing ordinary dependency semantics.
 
 When a wave is being fixed for implementation, wave planning acts as the coordinating pre-execution gate for that wave.
 Before fixing it, use every assigned cell plan's settled completion contract as input to `test-evidence-planning`, or verify that an applicable settled result already exists.
@@ -169,9 +185,10 @@ Completion is preserved when completed-cell behavior remains formally covered an
 
 ## Skill split
 
-This repository provides four skills:
+This repository provides five skills:
 
 - cell planning: establish one cell boundary, decompose that cell into plans, record intra-cell direct dependencies, and leave those plans wave-unassigned;
+- cross planning: establish cross-cell result dependencies and record a revisable coarse implementation order when coordination is needed, without assigning waves;
 - wave planning: use established dependencies, complete plan-level concurrency analysis, assign eligible cell plans to current and future waves without waiting for unrelated planning, and require completed `test-evidence-planning` when fixing a wave for implementation;
 - wave planning review: diagnose suspicious serialization after wave arrangement and direct the user to the responsible planning layer;
 - implementation: execute one fixed wave after that pre-execution gate while preserving plan boundaries, shared-part exclusivity, temporary-test rules, and cell completion conditions.
