@@ -112,10 +112,15 @@ Do not implement extra shared behavior merely in anticipation of future cells.
 
 A part created while one cell is incomplete may be reused by another cell, and the reusing cell may complete first.
 
-Unchanged shared parts may be reused by multiple plans in the same wave.
+Plans may read or reuse shared parts within the same wave, including while another plan changes them, when the planned uses remain compatible and independently establishable.
 
-When a cell plan changes a shared part, no other plan in that wave may read, depend on, or modify that shared part.
-Represent that mutual exclusion as a concurrency conflict rather than an artificial dependency.
+Assess shared-part interference at the concrete responsibility, interface, data contract, or intended edit boundary using settled plans and current repository facts.
+Common files, modules, dependencies, or read access alone do not establish a concurrency conflict.
+Independent changes can share a wave when their edits and behavioral contracts can be integrated without invalidating either plan's behavior, assumptions, or verification.
+
+Record a concurrency conflict, rather than an artificial dependency, when grounded overlapping edits or incompatible changes make simultaneous implementation unsafe.
+Use a direct dependency when one plan needs another plan's established result first.
+Reassess earlier broad conflicts during wave planning based on settled plan results and contracts; open implementation choices alone do not establish conflicts. Return genuinely unresolved planning decisions to their owning workflow.
 
 ## Incomplete cells
 
@@ -191,7 +196,7 @@ This repository provides five skills:
 - cross planning: establish cross-cell result dependencies and record a revisable coarse implementation order when coordination is needed, without assigning waves;
 - wave planning: use established dependencies, complete plan-level concurrency analysis, assign eligible cell plans to current and future waves without waiting for unrelated planning, and require completed `test-evidence-planning` when fixing a wave for implementation;
 - wave planning review: diagnose suspicious serialization after wave arrangement and direct the user to the responsible planning layer;
-- implementation: execute one fixed wave after that pre-execution gate while preserving plan boundaries, shared-part exclusivity, temporary-test rules, and cell completion conditions.
+- implementation: execute one fixed wave after that pre-execution gate while preserving plan boundaries, plan-level concurrency constraints, temporary-test rules, and cell completion conditions.
 
 A cell-specific review skill is unnecessary.
 Implementation-outcome review remains plan-based and is handled by the ordinary review workflow using the completion criteria created during cell planning. Wave planning review separately assesses the arrangement itself.
