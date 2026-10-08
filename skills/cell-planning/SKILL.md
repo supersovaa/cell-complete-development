@@ -30,7 +30,7 @@ Use independently establishable and verifiable results as the boundary criterion
 
 Determine and record only the intra-cell subset of direct dependencies using the ordinary dependency semantics.
 After splitting results, keep a direct dependency only when establishing the dependent plan's result actually requires the preceding plan's result.
-Leave cross-cell direct-dependency analysis to the later cross-cell planning phase and repository-wide concurrency analysis to the later wave-planning phase.
+When coordination across multiple cells is needed, leave cross-cell direct-dependency analysis to cross planning. Leave plan-level concurrency analysis and wave assignment to wave planning.
 
 Leave every plan produced by this phase wave-unassigned.
 Wave assignment is separate from durable plan state; wave-unassigned does not add a new plan state.
@@ -80,5 +80,5 @@ Do not require fictional or test-only cells for formal tests.
 Mocks, stubs, fixtures, and similar test doubles remain available for dependencies that are not cells.
 
 This skill owns one-cell decomposition, intra-cell direct dependencies, and cell-completion criteria.
-Cross-cell dependency analysis belongs to the later cross-cell planning phase. Repository-wide concurrency analysis, wave assignment, and the pre-execution wave gate belong to the later wave-planning phase.
+Cross-cell dependency analysis, when needed, belongs to cross planning. Plan-level concurrency analysis, wave assignment, and the pre-execution wave gate belong to wave planning.
 General plan semantics belong to the ordinary planning workflow.
