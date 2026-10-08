@@ -23,8 +23,14 @@ Treat the cell as a completion and verification boundary, not as a required code
 Decompose the current cell into implementation plans that each establish one concrete partial result toward completing that cell.
 Each such plan belongs to exactly one cell.
 
+Before finishing the decomposition, inspect every planned result, especially the result left to the completing plan.
+When one plan contains multiple meaningful results that can each be implemented and verified without requiring the others to be established first, split those results into separate plans.
+Keep results together when their implementation or meaningful verification is inseparable from the same change.
+Use independently establishable and verifiable results as the boundary criterion rather than mechanically creating one plan per effect, component, or implementation step.
+
 Determine and record only the intra-cell subset of direct dependencies using the ordinary dependency semantics.
-Leave repository-wide direct-dependency and concurrency analysis to wave planning.
+After splitting results, keep a direct dependency only when establishing the dependent plan's result actually requires the preceding plan's result.
+When coordination across multiple cells is needed, leave cross-cell direct-dependency analysis to cross planning. Leave plan-level concurrency analysis and wave assignment to wave planning.
 
 Leave every plan produced by this phase wave-unassigned.
 Wave assignment is separate from durable plan state; wave-unassigned does not add a new plan state.
@@ -33,7 +39,7 @@ Persist each plan's cell membership and explicit unassigned wave assignment usin
 When no repository-specific location exists, record them in the nearest common implementation index that already identifies the plans.
 Keep one authoritative cell membership and wave-assignment record per plan.
 
-Within the cell-complete workflow, keep a wave-unassigned plan out of implementation selection until wave planning completes repository-wide analysis and fixes a wave containing it.
+Within the cell-complete workflow, keep a wave-unassigned plan out of implementation selection until wave planning fixes a wave containing it.
 
 ## Keep shared implementation subordinate to the cell
 
@@ -74,5 +80,5 @@ Do not require fictional or test-only cells for formal tests.
 Mocks, stubs, fixtures, and similar test doubles remain available for dependencies that are not cells.
 
 This skill owns one-cell decomposition, intra-cell direct dependencies, and cell-completion criteria.
-Repository-wide dependency and concurrency analysis, wave assignment, and the pre-execution wave gate belong to wave planning.
+Cross-cell dependency analysis, when needed, belongs to cross planning. Plan-level concurrency analysis, wave assignment, and the pre-execution wave gate belong to wave planning.
 General plan semantics belong to the ordinary planning workflow.
