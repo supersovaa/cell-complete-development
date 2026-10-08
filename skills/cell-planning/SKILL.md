@@ -30,7 +30,7 @@ Use independently establishable and verifiable results as the boundary criterion
 
 Determine and record only the intra-cell subset of direct dependencies using the ordinary dependency semantics.
 After splitting results, keep a direct dependency only when establishing the dependent plan's result actually requires the preceding plan's result.
-Leave repository-wide direct-dependency and concurrency analysis to wave planning.
+Leave cross-cell direct-dependency analysis to the later cross-cell planning phase and repository-wide concurrency analysis to the later wave-planning phase.
 
 Leave every plan produced by this phase wave-unassigned.
 Wave assignment is separate from durable plan state; wave-unassigned does not add a new plan state.
