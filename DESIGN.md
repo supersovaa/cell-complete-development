@@ -120,7 +120,7 @@ Independent changes can share a wave when their edits and behavioral contracts c
 
 Record a concurrency conflict, rather than an artificial dependency, when grounded overlapping edits or incompatible changes make simultaneous implementation unsafe.
 Use a direct dependency when one plan needs another plan's established result first.
-Reassess earlier broad conflicts during wave planning; leave materially uncertain placements unassigned for the responsible planning workflow to resolve.
+Reassess earlier broad conflicts during wave planning based on settled plan results and contracts; open implementation choices alone do not establish conflicts. Return genuinely unresolved planning decisions to their owning workflow.
 
 ## Incomplete cells
 
