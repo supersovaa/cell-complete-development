@@ -35,7 +35,7 @@ When a cell contains multiple independently establishable and verifiable results
 
 When cross-cell dependencies or the coarse implementation order are stronger than the required result relationships support, direct the user back to cross planning.
 
-When plan-level concurrency conflicts or wave placement are more restrictive than the actual shared-part access requires, direct the user back to wave planning.
+When plan-level concurrency conflicts or wave placement are more restrictive than established plan-level interference justifies, direct the user back to wave planning.
 
 If the observed wave count is justified by required dependencies and genuine conflicts, report that conclusion without requiring replanning.
 
