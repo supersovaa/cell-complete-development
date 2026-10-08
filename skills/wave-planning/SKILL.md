@@ -17,6 +17,7 @@ Read cell membership, recorded direct dependencies, any available coarse cell im
 Inspect wave-unassigned and already future-assigned cell plans together with the repository-wide plan graph.
 
 Before assigning a plan to a wave, confirm that its required direct dependencies are known and finalize its concurrency constraints using the ordinary planning workflow, including conflicts involving shared implementation.
+Reassess recorded conflicts against current plan boundaries and repository facts before using them to exclude a same-wave placement; an earlier conflict label alone is not sufficient evidence.
 When coordination among several cells reveals an unresolved cross-cell dependency, use cross planning for the affected cells or leave their plans unassigned. Continue arranging independent eligible plans without waiting for unrelated planning to finish.
 Use established cell-local and cross-cell dependencies as scheduling inputs without inventing extra ordering constraints.
 
@@ -48,12 +49,20 @@ Use ordinary plan state and dependency results as inputs to wave construction ra
 Among viable placements, prefer lighter cells when the available planning information supports a useful distinction.
 Do not prescribe a fixed scoring system or a fixed maximum number of active cells.
 
-## Protect shared parts while arranging waves
+## Assess shared-part interference while arranging waves
 
-Unchanged shared implementation may be reused by multiple cell plans in the same wave.
+Plans may read or reuse shared implementation in the same wave, including when another plan changes it, if the planned use relies on compatible contracts and their results remain independently establishable.
 
-When one cell plan may change a shared part, no other plan in that wave may read, depend on, or modify that shared part.
-Represent that mutual exclusion as a concurrency conflict rather than an artificial dependency.
+Assess interactions at the narrowest concrete shared responsibility, interface, data contract, or intended edit supported by the plans and current repository facts.
+Check whether a proposed change can invalidate another plan's edits, required behavior, implementation assumptions, or verification.
+Sharing a file, module, or dependency, or reading a shared part, does not by itself establish a conflict.
+
+Allow independent changes in the same wave when their edits and behavioral contracts can be integrated without invalidating one another.
+Record a concurrency conflict when a concrete, plausible interference would make simultaneous implementation unsafe, and identify the interaction that justifies the constraint.
+Use a direct dependency instead when one plan requires the established result of another before implementation.
+
+If a material interaction cannot be assessed from settled plan boundaries and repository facts, leave the affected placement unassigned and return the uncertainty to its owning planning workflow.
+Continue arranging unaffected eligible plans.
 
 When contention becomes high, keep safe parallelism by skipping conflicting cells or delaying additional cell introduction.
 Do not force every active cell to advance in every wave.
