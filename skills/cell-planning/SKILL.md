@@ -23,7 +23,13 @@ Treat the cell as a completion and verification boundary, not as a required code
 Decompose the current cell into implementation plans that each establish one concrete partial result toward completing that cell.
 Each such plan belongs to exactly one cell.
 
+Before finishing the decomposition, inspect every planned result, especially the result left to the completing plan.
+When one plan contains multiple meaningful results that can each be implemented and verified without requiring the others to be established first, split those results into separate plans.
+Keep results together when their implementation or meaningful verification is inseparable from the same change.
+Use independently establishable and verifiable results as the boundary criterion rather than mechanically creating one plan per effect, component, or implementation step.
+
 Determine and record only the intra-cell subset of direct dependencies using the ordinary dependency semantics.
+After splitting results, keep a direct dependency only when establishing the dependent plan's result actually requires the preceding plan's result.
 Leave repository-wide direct-dependency and concurrency analysis to wave planning.
 
 Leave every plan produced by this phase wave-unassigned.
