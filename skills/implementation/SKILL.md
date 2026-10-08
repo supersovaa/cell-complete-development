@@ -39,8 +39,9 @@ Sharing a file or module is not by itself an execution conflict.
 Honor the recorded concurrency conflicts and implement each plan within its fixed boundary.
 Coordinate independently compatible edits to shared files so integration preserves each plan's required behavior and verification without silently overwriting another plan's work.
 
-If actual work reveals an unrecorded conflict, such as incompatible overlapping edits or an invalidated shared contract or implementation assumption, stop the affected attempt and return the changed conflict or plan boundary to the owning planning workflow before continuing that work.
-Follow the ordinary plan-driven rules for recording a stopped or invalidated attempt.
+Resolve concurrent edit integration issues within fixed plan boundaries when their required contracts and results remain compatible.
+If unrecorded interference makes simultaneous execution unsafe, stop the affected concurrent work and return the changed concurrency constraint to wave planning and the ordinary planning workflow before continuing.
+Use the ordinary stop-and-replan workflow only when a selected plan boundary actually becomes invalid.
 
 Shared implementation remains subordinate to cell progress.
 Do not expand the current work into speculative shared behavior for future cells.
