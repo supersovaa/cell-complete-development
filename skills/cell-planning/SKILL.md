@@ -80,5 +80,5 @@ Do not require fictional or test-only cells for formal tests.
 Mocks, stubs, fixtures, and similar test doubles remain available for dependencies that are not cells.
 
 This skill owns one-cell decomposition, intra-cell direct dependencies, and cell-completion criteria.
-Repository-wide dependency and concurrency analysis, wave assignment, and the pre-execution wave gate belong to wave planning.
+Cross-cell dependency analysis belongs to the later cross-cell planning phase. Repository-wide concurrency analysis, wave assignment, and the pre-execution wave gate belong to the later wave-planning phase.
 General plan semantics belong to the ordinary planning workflow.
