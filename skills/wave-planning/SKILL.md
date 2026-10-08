@@ -1,6 +1,6 @@
 ---
 name: wave-planning
-description: Arrange wave-unassigned cell plans into current and future waves by completing repository-wide dependency and concurrency analysis, then audit required test definitions when fixing a wave for implementation.
+description: Arrange wave-unassigned cell plans into current and future waves by completing repository-wide dependency and concurrency analysis, then require settled test-evidence planning before fixing a wave for implementation.
 ---
 
 # Wave Planning
@@ -57,21 +57,22 @@ Represent that mutual exclusion as a concurrency conflict rather than an artific
 When contention becomes high, keep safe parallelism by skipping conflicting cells or delaying additional cell introduction.
 Do not force every active cell to advance in every wave.
 
-## Check test completeness when fixing a wave
-
-Required test definitions may be recorded while individual cell plans are created.
-Cell planning does not audit whether every required test case and expected outcome has been recorded.
+## Require test-evidence planning when fixing a wave
 
 Before fixing a wave for implementation, inspect every cell plan assigned to that wave.
-Ensure every required test case and expected outcome for those plans' settled completion contracts is recorded using the ordinary planning workflow and repository conventions.
-Include deferred formal coverage that cell planning assigned to a completing plan because the cell now makes the case realizable.
-Do not require a current test definition for unresolved deferred formal coverage whose realization condition is still absent.
-Do not fix the wave or begin its implementation while any required test definition is missing.
+Use each plan's settled completion contract as the bounded input to `test-evidence-planning`, or verify that an applicable settled test-evidence planning result already exists.
 
-If this audit exposes an unresolved requirement, design ambiguity, invalid plan boundary, dependency change, or concurrency conflict, return that issue to its owning workflow before fixing the wave.
-Otherwise, filling test-definition gaps at this gate does not require reopening already-settled implementation boundaries.
+Require the resulting test definitions and material testing decisions to be complete, recorded using repository conventions, and linked from each plan before fixing the wave.
+Ensure the planning scope includes deferred formal coverage that cell planning assigned to a completing plan when its realization condition is present.
+Deferred formal coverage whose realization condition is still absent remains outside the current wave's required test-evidence planning scope.
 
-This skill owns repository-wide dependency and concurrency completion for cell plans, wave assignment, and required test-definition completeness checking when fixing a wave for implementation.
+Do not fix the wave or begin its implementation while required test-evidence planning is incomplete.
+
+If test-evidence planning exposes an unresolved requirement or design ambiguity, return that issue to its owning workflow.
+If the gate exposes an invalid plan boundary, dependency change, or concurrency conflict, return that issue to its owning planning workflow before fixing the wave.
+
+This skill owns repository-wide dependency and concurrency completion for cell plans, wave assignment, and the pre-execution gate that requires completed `test-evidence-planning` for a fixed wave.
 Cell-local decomposition and cell-completion criteria belong to cell planning.
+Required test cases and expected outcomes belong to `test-evidence-planning`.
 Wave execution belongs to cell-complete implementation.
 General plan semantics belong to the ordinary planning workflow.

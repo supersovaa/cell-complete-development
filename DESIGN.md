@@ -84,9 +84,9 @@ Dependency semantics, dependency recording, plan state, and plan-readiness seman
 Wave planning changes when repository-wide dependency analysis is performed, not what a dependency means.
 
 When a wave is being fixed for implementation, wave planning acts as the coordinating pre-execution gate for that wave.
-Before fixing it, audit every assigned cell plan's settled completion contract and ensure every required test case and expected outcome is recorded through the ordinary planning workflow.
-Do not fix or execute the wave while any required test definition is missing.
-If that audit exposes an unresolved requirement, design ambiguity, invalid plan boundary, dependency change, or concurrency conflict, return it to its owning workflow before fixing the wave.
+Before fixing it, use every assigned cell plan's settled completion contract as input to `test-evidence-planning`, or verify that an applicable settled result already exists.
+Do not fix or execute the wave until the required test definitions and material testing decisions produced by `test-evidence-planning` are complete, persisted using repository conventions, and linked from each plan.
+If that gate exposes an unresolved requirement, design ambiguity, invalid plan boundary, dependency change, or concurrency conflict, return it to its owning workflow before fixing the wave.
 
 ## Shared parts
 
@@ -162,7 +162,7 @@ Completion is preserved when completed-cell behavior remains formally covered an
 This repository provides three skills:
 
 - cell planning: establish one cell boundary, decompose that cell into plans, record intra-cell direct dependencies, and leave those plans wave-unassigned;
-- wave planning: complete repository-wide dependency and concurrency analysis, assign supported cell plans to current and future waves, and audit required test-definition completeness when fixing a wave for implementation;
+- wave planning: complete repository-wide dependency and concurrency analysis, assign supported cell plans to current and future waves, and require completed `test-evidence-planning` when fixing a wave for implementation;
 - implementation: execute one fixed wave after that pre-execution gate while preserving plan boundaries, shared-part exclusivity, temporary-test rules, and cell completion conditions.
 
 A cell-specific review skill is unnecessary.
