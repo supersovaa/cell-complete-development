@@ -15,9 +15,9 @@ Use an existing repository definition when available; otherwise establish the ce
 
 A cell is a completion and verification boundary, not necessarily a code-ownership, dependency, or implementation boundary.
 
-## Two-pass planning
+## Planning responsibilities
 
-Planning is split into two independently invocable skills: cell planning for one-cell decomposition and wave planning for repository-wide arrangement.
+Cell planning and wave planning are independently invocable. When multiple cells need coordination, cross planning may supply cross-cell dependency findings; unrelated eligible work can be arranged without waiting for all other planning to finish.
 
 ### Cell-local planning
 
@@ -42,12 +42,11 @@ Keep enough future cell-local structure to guide later work, but do not invent p
 
 ### Global wave planning
 
-After cell-local planning, inspect wave-unassigned and already future-assigned cell plans together with the repository-wide plan graph.
+When arranging waves, inspect wave-unassigned and already future-assigned cell plans together with the repository-wide plan graph. Use available cross-cell findings where relevant.
 
-Complete the ordinary planning dependency and concurrency analysis that cell-local planning intentionally deferred.
-Before wave assignment, finalize each affected plan's direct dependencies and concurrency constraints, including cross-cell dependencies, dependencies on non-cell work, and conflicts involving shared implementation.
+Use the established direct dependencies as scheduling inputs. Before wave assignment, confirm required dependencies for the selected plans and finalize plan-level concurrency constraints, including conflicts involving shared implementation. If cross-cell relationships remain unclear for affected plans, invoke cross planning for those cells or leave their plans unassigned while arranging independent eligible work.
 
-If this global analysis shows that a cell plan's boundary or cell-local dependency structure is invalid, return that plan to the ordinary planning workflow before assigning it.
+If analysis reveals an invalid boundary or dependency structure, leave the affected plan unassigned and return it to the owning planning workflow while continuing with unaffected eligible work.
 
 Assign supported cell plans to synchronized waves and persist the assignments in the authoritative implementation index.
 Plan multiple future waves when the known dependencies and conflicts are sufficient to do so.
@@ -81,7 +80,7 @@ When contention becomes high, reduce new cell introduction or let conflicting ce
 Among viable placements, prefer lighter cells when useful, without prescribing a detailed scoring algorithm.
 
 Dependency semantics, dependency recording, plan state, and plan-readiness semantics belong to the ordinary plan workflow.
-Wave planning changes when repository-wide dependency analysis is performed, not what a dependency means.
+Wave planning uses established dependencies to construct synchronized waves and does not change ordinary dependency semantics.
 
 When a wave is being fixed for implementation, wave planning acts as the coordinating pre-execution gate for that wave.
 Before fixing it, use every assigned cell plan's settled completion contract as input to `test-evidence-planning`, or verify that an applicable settled result already exists.
@@ -170,7 +169,7 @@ Completion is preserved when completed-cell behavior remains formally covered an
 
 ## Skill split
 
-This repository provides four skills (a fifth, cross planning, is introduced separately):
+This repository provides four skills:
 
 - cell planning: establish one cell boundary, decompose that cell into plans, record intra-cell direct dependencies, and leave those plans wave-unassigned;
 - wave planning: use established dependencies, complete plan-level concurrency analysis, assign eligible cell plans to current and future waves without waiting for unrelated planning, and require completed `test-evidence-planning` when fixing a wave for implementation;
