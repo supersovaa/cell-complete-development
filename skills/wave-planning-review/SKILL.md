@@ -22,10 +22,14 @@ When `W > C + Pmax`, treat the arrangement as having a high likelihood of avoida
 
 Do not reject an arrangement solely because it exceeds this threshold.
 Dependencies and genuine concurrency conflicts may justify a larger wave count.
+Inspect a suspicious pattern of isolated shared-part plans even below the threshold when the arrangement itself suggests avoidable serialization.
 
 ## Locate the source of avoidable serialization
 
 Inspect the causes that prevent plans from sharing earlier waves.
+For each suspicious concurrency conflict, look for concrete incompatible edits, changed contracts, or invalidated implementation and verification assumptions.
+A shared file, module, dependency, or read access alone is not enough to justify separating plans; check recorded conflicts against current plan boundaries rather than inheriting broad exclusions unexamined.
+Distinguish simultaneous-implementation interference from a true prerequisite result that requires a direct dependency.
 
 When a cell contains multiple independently establishable and verifiable results inside one plan, direct the user back to cell planning.
 
