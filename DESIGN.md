@@ -170,11 +170,12 @@ Completion is preserved when completed-cell behavior remains formally covered an
 
 ## Skill split
 
-This repository provides three skills:
+This repository provides four skills (a fifth, cross planning, is introduced separately):
 
 - cell planning: establish one cell boundary, decompose that cell into plans, record intra-cell direct dependencies, and leave those plans wave-unassigned;
-- wave planning: complete repository-wide dependency and concurrency analysis, assign supported cell plans to current and future waves, and require completed `test-evidence-planning` when fixing a wave for implementation;
+- wave planning: use established dependencies, complete plan-level concurrency analysis, assign eligible cell plans to current and future waves without waiting for unrelated planning, and require completed `test-evidence-planning` when fixing a wave for implementation;
+- wave planning review: diagnose suspicious serialization after wave arrangement and direct the user to the responsible planning layer;
 - implementation: execute one fixed wave after that pre-execution gate while preserving plan boundaries, shared-part exclusivity, temporary-test rules, and cell completion conditions.
 
 A cell-specific review skill is unnecessary.
-Review remains plan-based and is handled by the ordinary review workflow using the completion criteria created during cell planning.
+Implementation-outcome review remains plan-based and is handled by the ordinary review workflow using the completion criteria created during cell planning. Wave planning review separately assesses the arrangement itself.
