@@ -56,13 +56,11 @@ Plans may read or reuse shared implementation in the same wave, including when a
 Assess interactions at the narrowest concrete shared responsibility, interface, data contract, or intended edit supported by the plans and current repository facts.
 Check whether a proposed change can invalidate another plan's edits, required behavior, implementation assumptions, or verification.
 Sharing a file, module, or dependency, or reading a shared part, does not by itself establish a conflict.
+Assess implementation choices left open by the plan through their settled results and contracts rather than assuming that possible edit locations will conflict.
 
 Allow independent changes in the same wave when their edits and behavioral contracts can be integrated without invalidating one another.
 Record a concurrency conflict when a concrete, plausible interference would make simultaneous implementation unsafe, and identify the interaction that justifies the constraint.
 Use a direct dependency instead when one plan requires the established result of another before implementation.
-
-If a material interaction cannot be assessed from settled plan boundaries and repository facts, leave the affected placement unassigned and return the uncertainty to its owning planning workflow.
-Continue arranging unaffected eligible plans.
 
 When contention becomes high, keep safe parallelism by skipping conflicting cells or delaying additional cell introduction.
 Do not force every active cell to advance in every wave.
