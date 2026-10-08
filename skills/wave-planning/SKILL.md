@@ -1,25 +1,25 @@
 ---
 name: wave-planning
-description: Arrange wave-unassigned cell plans into current and future waves by completing repository-wide dependency and concurrency analysis, then require settled test-evidence planning before fixing a wave for implementation.
+description: Arrange cross-planned cell plans into current and future waves by completing plan-level concurrency analysis, then require settled test-evidence planning before fixing a wave for implementation.
 ---
 
 # Wave Planning
 
-Use this skill after one or more cells have been planned locally and their implementation plans are ready for repository-wide dependency analysis and wave assignment.
+Use this skill after cross planning has established cross-cell result dependencies and a coarse implementation order, and the resulting plans are ready for plan-level concurrency analysis and wave assignment.
 
 Use this skill together with the repository's ordinary plan-driven planning rules.
 Those rules own dependency semantics, dependency recording, plan state, plan-readiness semantics, durable state, and general concurrency-conflict recording.
-This skill owns repository-wide wave arrangement for cell-complete work.
+This skill owns plan-level concurrency analysis and repository-wide wave arrangement for cell-complete work.
 
-## Complete repository-wide dependency analysis
+## Complete plan-level concurrency analysis
 
-Read cell membership and wave assignment from their authoritative implementation-index records.
+Read cell membership, cross-cell dependencies, coarse implementation order, and wave assignment from their authoritative records.
 Inspect wave-unassigned and already future-assigned cell plans together with the repository-wide plan graph.
 
-Complete the ordinary planning dependency and concurrency analysis deferred by cell planning.
-Before assigning a plan to a wave, finalize its direct dependencies and concurrency constraints using the ordinary planning workflow, including cross-cell dependencies, dependencies on non-cell work, and conflicts involving shared implementation.
+Before assigning a plan to a wave, finalize its concurrency constraints using the ordinary planning workflow, including conflicts involving shared implementation.
+Treat the dependencies established by cell and cross planning as scheduling inputs rather than rediscovering the cell relationship structure during wave placement.
 
-If this analysis exposes an unresolved requirement, invalid plan boundary, or incorrect intra-cell dependency structure, return the affected plan to its owning planning workflow before assigning it to a wave.
+If concurrency analysis exposes an unresolved requirement or shows that an upstream planning result is no longer valid, stop wave arrangement for the affected work and return the issue to its owning planning workflow before assigning it to a wave.
 
 ## Arrange current and future waves
 
@@ -71,8 +71,9 @@ Do not fix the wave or begin its implementation while required test-evidence pla
 If test-evidence planning exposes an unresolved requirement or design ambiguity, return that issue to its owning workflow.
 If the gate exposes an invalid plan boundary, dependency change, or concurrency conflict, return that issue to its owning planning workflow before fixing the wave.
 
-This skill owns repository-wide dependency and concurrency completion for cell plans, wave assignment, and the pre-execution gate that requires completed `test-evidence-planning` for a fixed wave.
+This skill owns plan-level concurrency completion, wave assignment, and the pre-execution gate that requires completed `test-evidence-planning` for a fixed wave.
 Cell-local decomposition and cell-completion criteria belong to cell planning.
+Cross-cell result dependencies and coarse cell implementation order belong to cross planning.
 Required test cases and expected outcomes belong to `test-evidence-planning`.
 Wave execution belongs to cell-complete implementation.
 General plan semantics belong to the ordinary planning workflow.
