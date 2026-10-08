@@ -151,6 +151,17 @@ A cell is complete only when:
 
 These conditions belong in the completion criteria of the cell plan that completes the cell so the ordinary plan-based implementation and review workflows can enforce them.
 
+## Wave planning review
+
+After a complete future wave arrangement exists, review it for suspicious serialization before treating the arrangement as efficient.
+
+Let `C` be the number of covered cells, `Pmax` the largest number of plans in any one covered cell, and `W` the number of waves in the arrangement.
+When `W > C + Pmax`, investigate whether avoidable serialization comes from cell-local decomposition, cross-cell relationships, or wave-level concurrency and placement.
+Treat this threshold as a diagnostic warning rather than a correctness condition, because required dependencies and genuine conflicts may justify additional waves.
+
+Keep replanning under user control.
+Report the evidence and the responsible planning layer rather than silently rewriting upstream plans during review.
+
 ## Refactoring
 
 Completed cells may be refactored internally, including extracting or reorganizing shared parts.
@@ -159,11 +170,10 @@ Completion is preserved when completed-cell behavior remains formally covered an
 
 ## Skill split
 
-This repository provides four skills:
+This repository provides three skills:
 
 - cell planning: establish one cell boundary, decompose that cell into plans, record intra-cell direct dependencies, and leave those plans wave-unassigned;
-- wave planning: complete plan-level concurrency analysis, assign supported cell plans to current and future waves, and require completed `test-evidence-planning` when fixing a wave for implementation;
-- wave planning review: diagnose suspicious serialization after wave arrangement and direct the user to the planning layer that should be reconsidered;
+- wave planning: complete repository-wide dependency and concurrency analysis, assign supported cell plans to current and future waves, and require completed `test-evidence-planning` when fixing a wave for implementation;
 - implementation: execute one fixed wave after that pre-execution gate while preserving plan boundaries, shared-part exclusivity, temporary-test rules, and cell completion conditions.
 
 A cell-specific review skill is unnecessary.
