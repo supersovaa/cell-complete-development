@@ -13,7 +13,10 @@ Required test cases, expected outcomes, and other test-evidence planning decisio
 
 ## Skill setup
 
-Install the three `SKILL.md` files linked above using the target agent's skill installation mechanism.
+Install the skill directories you need from [`skills/`](skills/) into the location used by your agent or skill loader.
+For loaders that use one skill per directory, install `skills/cell-planning/`, `skills/wave-planning/`, and `skills/implementation/` as separate directories, preserving each directory's `SKILL.md`.
+
+These skills extend the [plan-driven skills](https://github.com/supersovaa/plan-driven-implementation/tree/main/skills): use `plan-driven-planning` with cell and wave planning, `plan-driven-implementation` with wave execution, and `plan-driven-review` for plan-based review.
 When fixing a wave for implementation, also make the external [`test-evidence-planning`](https://github.com/supersovaa/requirement-driven-testing/blob/main/skills/planning/SKILL.md) skill available.
 Completion of its required planning results is a condition for **fixing a wave**, not for **starting wave planning**.
 
