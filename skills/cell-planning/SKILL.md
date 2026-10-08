@@ -39,7 +39,7 @@ Persist each plan's cell membership and explicit unassigned wave assignment usin
 When no repository-specific location exists, record them in the nearest common implementation index that already identifies the plans.
 Keep one authoritative cell membership and wave-assignment record per plan.
 
-Within the cell-complete workflow, keep a wave-unassigned plan out of implementation selection until wave planning completes repository-wide analysis and fixes a wave containing it.
+Within the cell-complete workflow, keep a wave-unassigned plan out of implementation selection until wave planning fixes a wave containing it.
 
 ## Keep shared implementation subordinate to the cell
 
