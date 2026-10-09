@@ -7,7 +7,7 @@ Skills for implementing systems around concrete domain cells: independently iden
 - [cell-planning](skills/cell-planning/SKILL.md): plan one cell at a time, decomposing it into implementation plans, recording intra-cell direct dependencies, and persisting cell membership with an explicit unassigned wave.
 - [cross-planning](skills/cross-planning/SKILL.md): examine dependencies among multiple planned cells when coordination is needed, and record a revisable coarse order in existing Markdown.
 - [wave-planning](skills/wave-planning/SKILL.md): arrange eligible cell plans using known dependencies and plan-level concurrency analysis, without waiting for unrelated cross planning.
-- [wave-planning-review](skills/wave-planning-review/SKILL.md): review completed wave arrangements for suspicious serialization and direct the user to the planning layer that should be reconsidered.
+- [wave-planning-review](skills/wave-planning-review/SKILL.md): review completed wave arrangements for suspicious serialization and identify whether the cause calls for planning changes or shared-implementation design review.
 - [cell-complete-implementation](skills/implementation/SKILL.md): execute one fixed wave while preserving plan boundaries, established concurrency constraints, temporary-test rules, and cell completion conditions.
 
 General plan structure, dependency semantics, individual plan execution, and implementation review remain the responsibility of the corresponding plan-driven skills. `wave-planning-review` adds diagnostic review of the completed wave arrangement.
