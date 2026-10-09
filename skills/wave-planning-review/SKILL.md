@@ -1,6 +1,6 @@
 ---
 name: wave-planning-review
-description: Review a completed cell-wave arrangement for suspicious serialization and direct the user to the upstream planning layer that should be reconsidered.
+description: Review a completed cell-wave arrangement for suspicious serialization and identify whether its cause lies in planning constraints or tightly coupled shared implementation.
 ---
 
 # Wave Planning Review
