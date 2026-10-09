@@ -177,10 +177,11 @@ After a complete future wave arrangement exists, review it for suspicious serial
 
 Let `C` be the number of covered cells, `Pmax` the largest number of plans in any one covered cell, and `W` the number of waves in the arrangement.
 When `W > C + Pmax`, investigate whether avoidable serialization comes from cell-local decomposition, cross-cell relationships, or wave-level concurrency and placement.
+Also distinguish overbroad concurrency constraints from genuine interference caused by responsibilities concentrated in shared implementation.
 Treat this threshold as a diagnostic warning rather than a correctness condition, because required dependencies and genuine conflicts may justify additional waves.
 
-Keep replanning under user control.
-Report the evidence and the responsible planning layer rather than silently rewriting upstream plans during review.
+Keep replanning and redesign under user control.
+Report the evidence and the responsible planning layer or possible shared-implementation design concern rather than silently changing upstream plans or implementation during review.
 
 ## Refactoring
 
@@ -195,7 +196,7 @@ This repository provides five skills:
 - cell planning: establish one cell boundary, decompose that cell into plans, record intra-cell direct dependencies, and leave those plans wave-unassigned;
 - cross planning: establish cross-cell result dependencies and record a revisable coarse implementation order when coordination is needed, without assigning waves;
 - wave planning: use established dependencies, complete plan-level concurrency analysis, assign eligible cell plans to current and future waves without waiting for unrelated planning, and require completed `test-evidence-planning` when fixing a wave for implementation;
-- wave planning review: diagnose suspicious serialization after wave arrangement and direct the user to the responsible planning layer;
+- wave planning review: diagnose suspicious serialization after wave arrangement and direct the user to the responsible planning layer or shared-implementation design evaluation;
 - implementation: execute one fixed wave after that pre-execution gate while preserving plan boundaries, plan-level concurrency constraints, temporary-test rules, and cell completion conditions.
 
 A cell-specific review skill is unnecessary.

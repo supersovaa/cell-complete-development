@@ -1,6 +1,6 @@
 ---
 name: wave-planning-review
-description: Review a completed cell-wave arrangement for suspicious serialization and direct the user to the upstream planning layer that should be reconsidered.
+description: Review a completed cell-wave arrangement for suspicious serialization and identify whether its cause lies in planning constraints or tightly coupled shared implementation.
 ---
 
 # Wave Planning Review
@@ -37,12 +37,16 @@ When cross-cell dependencies or the coarse implementation order are stronger tha
 
 When plan-level concurrency conflicts or wave placement are more restrictive than established plan-level interference justifies, direct the user back to wave planning.
 
+When genuine concurrency interference comes from independently meaningful responsibilities concentrated in one shared implementation concept, report the coupling as a possible design concern separately from conflict-label or wave-placement errors.
+Recommend evaluating the shared concept through established meaning and whole-path simplification, referring to `concept-introduction-threshold` when available without requiring it to complete this review.
+Preserve confirmed concurrency constraints unless a settled redesign removes their cause.
+
 If the observed wave count is justified by required dependencies and genuine conflicts, report that conclusion without requiring replanning.
 
 ## Keep replanning under user control
 
-Report the evidence for suspected inefficiency, the planning layer responsible for it, and the expected effect of reconsidering that layer.
-Ask the user to return to the identified upstream planning layer rather than silently rewriting upstream plans during review.
+Report the evidence for suspected inefficiency, whether it points to a planning-layer issue or a possible shared-implementation design concern, and the expected effect of reconsidering the responsible area.
+Ask the user to revisit the identified planning layer or evaluate the shared design as appropriate, rather than silently changing upstream plans or implementation during review.
 
 This skill owns only diagnostic review of the completed wave arrangement.
 It does not create cell plans, establish cross-cell dependencies, assign waves, or modify the reviewed planning records.
