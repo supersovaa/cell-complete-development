@@ -37,6 +37,10 @@ When cross-cell dependencies or the coarse implementation order are stronger tha
 
 When plan-level concurrency conflicts or wave placement are more restrictive than established plan-level interference justifies, direct the user back to wave planning.
 
+When genuine concurrency interference comes from independently meaningful responsibilities concentrated in one shared implementation concept, report the coupling as a possible design concern separately from conflict-label or wave-placement errors.
+Recommend evaluating the shared concept through established meaning and whole-path simplification, referring to `concept-introduction-threshold` when available without requiring it to complete this review.
+Preserve confirmed concurrency constraints unless a settled redesign removes their cause.
+
 If the observed wave count is justified by required dependencies and genuine conflicts, report that conclusion without requiring replanning.
 
 ## Keep replanning under user control
