@@ -196,7 +196,7 @@ This repository provides five skills:
 - cell planning: establish one cell boundary, decompose that cell into plans, record intra-cell direct dependencies, and leave those plans wave-unassigned;
 - cross planning: establish cross-cell result dependencies and record a revisable coarse implementation order when coordination is needed, without assigning waves;
 - wave planning: use established dependencies, complete plan-level concurrency analysis, assign eligible cell plans to current and future waves without waiting for unrelated planning, and require completed `test-evidence-planning` when fixing a wave for implementation;
-- wave planning review: diagnose suspicious serialization after wave arrangement and direct the user to the responsible planning layer;
+- wave planning review: diagnose suspicious serialization after wave arrangement and direct the user to the responsible planning layer or shared-implementation design evaluation;
 - implementation: execute one fixed wave after that pre-execution gate while preserving plan boundaries, plan-level concurrency constraints, temporary-test rules, and cell completion conditions.
 
 A cell-specific review skill is unnecessary.
