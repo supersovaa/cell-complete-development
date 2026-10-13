@@ -74,7 +74,7 @@ Keep waves beyond the next execution target in future status and fix only the ea
 Future wave assignments remain revisable until their wave is fixed for implementation.
 Only plans in a fixed wave are eligible for implementation through the cell-complete workflow.
 
-A typical progression is:
+A progression requiring staggered placement may look like:
 
 - wave 1: A1;
 - wave 2: A2 and B1;
@@ -82,7 +82,7 @@ A typical progression is:
 
 Here A, B, and C are cells, and each numbered item is a cell plan.
 
-Use staircase-shaped diagonal progress as the default:
+Use staircase-shaped diagonal progress when dependencies or concrete conflicts require staggered placement:
 
 - plans from the same cell may share a wave when no direct dependency or concurrency conflict prevents simultaneous execution;
 - additional cells may enter later waves when at least one of their wave-unassigned plans is eligible for placement;
@@ -91,9 +91,9 @@ Use staircase-shaped diagonal progress as the default:
 - all work in the current wave finishes before the next wave begins.
 
 Do not impose a fixed maximum number of active cells.
-When contention becomes high, reduce new cell introduction or let conflicting cells skip a wave.
+When concrete concurrency conflicts prevent co-placement, reduce new cell introduction or let conflicting cells skip a wave.
 
-Among viable placements, prefer lighter cells when useful, without prescribing a detailed scoring algorithm.
+Place eligible plans in their earliest viable future wave unless a specific scheduling constraint justifies deferral. Among placements requiring a choice, prefer lighter cells when useful, without prescribing a detailed scoring algorithm.
 
 Dependency semantics, dependency recording, plan state, and plan-readiness semantics belong to the ordinary plan workflow.
 Cell planning establishes intra-cell dependencies; cross planning determines needed cross-cell dependencies and coarse order. Wave planning consumes established dependencies and completes concurrency analysis without changing ordinary dependency semantics.

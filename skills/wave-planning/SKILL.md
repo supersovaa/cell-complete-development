@@ -36,7 +36,7 @@ Fix only the earliest not-yet-completed wave selected for execution.
 Future wave assignments may be revised until their wave is fixed for implementation.
 Only plans in a fixed wave are eligible for implementation through the cell-complete workflow.
 
-Use staircase-shaped diagonal progress as the default pattern:
+Use staircase-shaped diagonal progress when dependencies or concrete conflicts require staggered placement:
 
 - plans from the same cell may share a wave when no direct dependency or concurrency conflict prevents simultaneous execution;
 - additional cells may enter later waves when at least one of their wave-unassigned plans is eligible for placement;
@@ -46,8 +46,8 @@ Use staircase-shaped diagonal progress as the default pattern:
 
 Use ordinary plan state and dependency results as inputs to wave construction rather than redefining plan readiness or dependency semantics here.
 
-Among viable placements, prefer lighter cells when the available planning information supports a useful distinction.
-Do not prescribe a fixed scoring system or a fixed maximum number of active cells.
+Place eligible plans in the earliest revisable wave supported by their dependencies and concrete concurrency conflicts. Defer an otherwise placeable plan only for a specific, evidenced constraint recorded in existing planning records; keep execution-capacity limits distinct from plan conflicts.
+Among placements that require a choice, prefer lighter cells when useful, without a fixed scoring system or maximum number of active cells.
 
 ## Assess shared-part interference while arranging waves
 
@@ -62,7 +62,7 @@ Allow independent changes in the same wave when their edits and behavioral contr
 Record a concurrency conflict when a concrete, plausible interference would make simultaneous implementation unsafe, and identify the interaction that justifies the constraint.
 Use a direct dependency instead when one plan requires the established result of another before implementation.
 
-When contention becomes high, keep safe parallelism by skipping conflicting cells or delaying additional cell introduction.
+When concrete concurrency conflicts prevent co-placement, keep safe parallelism by skipping conflicting cells or delaying additional cell introduction.
 Do not force every active cell to advance in every wave.
 
 ## Require test-evidence planning when fixing a wave
