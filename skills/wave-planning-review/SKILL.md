@@ -23,6 +23,8 @@ When `W > C + Pmax`, treat the arrangement as having a high likelihood of avoida
 Do not reject an arrangement solely because it exceeds this threshold.
 Dependencies and genuine concurrency conflicts may justify a larger wave count.
 Inspect a suspicious pattern of isolated shared-part plans even below the threshold when the arrangement itself suggests avoidable serialization.
+Independently of the wave-count threshold, check whether plans placed in later waves could have safely joined an earlier revisable wave based on recorded dependencies and concrete concurrency conflicts.
+For each such deferral, check that existing planning records identify the plan, earlier viable wave, and a specific scheduling constraint. Distinguish evidenced execution-environment limits from plan-level interference; treat unsupported deferrals as suspected avoidable serialization.
 
 ## Locate the source of avoidable serialization
 
