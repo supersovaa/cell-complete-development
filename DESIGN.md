@@ -92,7 +92,7 @@ Use staircase-shaped diagonal progress as the default:
 
 Evaluate every eligible unassigned or future-assigned plan for its earliest revisable wave compatible with established dependencies and concrete concurrency conflicts. Place it there unless a specific, evidenced scheduling constraint requires deferral. Record each otherwise viable plan's deferral, its earlier viable wave, and the concrete reason in existing planning records, and reassess that reason when revising future waves.
 
-Treat execution-environment concurrency limits separately from plan-level dependencies and conflicts; they constrain wave placement only when they prevent safe same-wave execution and must be recorded explicitly. The diagonal progression pattern and preference for lighter cells guide choices only where constraints actually require a choice, not arbitrary batching of independent eligible work.
+Treat execution-environment concurrency limits separately from plan-level dependencies and conflicts; they constrain wave placement only when they prevent safe same-wave execution and must be recorded explicitly. The diagonal progression pattern is not a target batch size for independently eligible work.
 
 Do not impose a fixed maximum number of active cells.
 When evidenced interference prevents safe co-placement, reduce new cell introduction or let conflicting cells skip a wave.
