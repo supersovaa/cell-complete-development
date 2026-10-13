@@ -27,8 +27,6 @@ Inspect a suspicious pattern of isolated shared-part plans even below the thresh
 ## Locate the source of avoidable serialization
 
 Inspect the causes that prevent plans from sharing earlier waves.
-Regardless of the wave-count threshold, check whether plans placed in later waves could have safely joined an earlier revisable wave based on recorded dependencies and concrete concurrency conflicts.
-For each such deferral, check that existing planning records identify the plan, earlier viable wave, and a specific scheduling constraint. Distinguish evidenced execution-environment limits from plan-level interference; treat unsupported deferrals as suspected avoidable serialization.
 For each suspicious concurrency conflict, look for concrete incompatible edits, changed contracts, or invalidated implementation and verification assumptions.
 A shared file, module, dependency, or read access alone is not enough to justify separating plans; check recorded conflicts against current plan boundaries rather than inheriting broad exclusions unexamined.
 Distinguish simultaneous-implementation interference from a true prerequisite result that requires a direct dependency.
