@@ -38,7 +38,7 @@ Only plans in a fixed wave are eligible for implementation through the cell-comp
 
 Use staircase-shaped diagonal progress as the default pattern:
 
-- a cell contributes at most one plan to a wave;
+- plans from the same cell may share a wave when no direct dependency or concurrency conflict prevents simultaneous execution;
 - additional cells may enter later waves when at least one of their wave-unassigned plans is eligible for placement;
 - no existing cell must complete before another cell enters;
 - a cell may skip a wave when none of its eligible plans can safely run in that wave;

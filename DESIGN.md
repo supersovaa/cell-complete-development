@@ -84,7 +84,7 @@ Here A, B, and C are cells, and each numbered item is a cell plan.
 
 Use staircase-shaped diagonal progress as the default:
 
-- a cell contributes at most one plan to a wave;
+- plans from the same cell may share a wave when no direct dependency or concurrency conflict prevents simultaneous execution;
 - additional cells may enter later waves when at least one of their wave-unassigned plans is eligible for placement;
 - no existing cell must complete before another cell enters;
 - a cell may skip a wave when none of its eligible plans can safely run with selected work;
