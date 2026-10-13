@@ -20,10 +20,8 @@ If that pre-execution gate is incomplete, return to wave planning instead of beg
 Execute the wave's cell plans in parallel where their recorded constraints allow it.
 Do not start work from a later wave before every plan attempt in the current wave has finished its current attempt.
 
-A cell contributes at most one plan to the wave.
-
 If a cell plan cannot proceed because its boundary becomes invalid, follow the ordinary plan-driven stop and replanning workflow.
-Do not substitute another plan from the same cell into the already fixed wave.
+Do not substitute another plan into the already fixed wave.
 
 ## Preserve completed-cell composition in provisional cells
 
