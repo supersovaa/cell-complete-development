@@ -90,14 +90,10 @@ Use staircase-shaped diagonal progress as the default:
 - a cell may skip a wave when none of its eligible plans can safely run with selected work;
 - all work in the current wave finishes before the next wave begins.
 
-Evaluate every eligible unassigned or future-assigned plan for its earliest revisable wave compatible with established dependencies and concrete concurrency conflicts. Place it there unless a specific, evidenced scheduling constraint requires deferral. Record each otherwise viable plan's deferral, its earlier viable wave, and the concrete reason in existing planning records, and reassess that reason when revising future waves.
-
-Treat execution-environment concurrency limits separately from plan-level dependencies and conflicts; they constrain wave placement only when they prevent safe same-wave execution and must be recorded explicitly. The diagonal progression pattern is not a target batch size for independently eligible work.
-
 Do not impose a fixed maximum number of active cells.
-When evidenced interference prevents safe co-placement, reduce new cell introduction or let conflicting cells skip a wave.
+When concrete concurrency conflicts prevent co-placement, reduce new cell introduction or let conflicting cells skip a wave.
 
-Among placements requiring a choice, prefer lighter cells when useful, without prescribing a detailed scoring algorithm.
+Place eligible plans in their earliest viable future wave unless a specific scheduling constraint justifies deferral. Among placements requiring a choice, prefer lighter cells when useful, without prescribing a detailed scoring algorithm.
 
 Dependency semantics, dependency recording, plan state, and plan-readiness semantics belong to the ordinary plan workflow.
 Cell planning establishes intra-cell dependencies; cross planning determines needed cross-cell dependencies and coarse order. Wave planning consumes established dependencies and completes concurrency analysis without changing ordinary dependency semantics.
