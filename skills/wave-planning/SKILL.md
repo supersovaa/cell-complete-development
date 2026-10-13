@@ -46,7 +46,13 @@ Use staircase-shaped diagonal progress as the default pattern:
 
 Use ordinary plan state and dependency results as inputs to wave construction rather than redefining plan readiness or dependency semantics here.
 
-Among viable placements, prefer lighter cells when the available planning information supports a useful distinction.
+Evaluate every wave-unassigned and future-assigned plan with settled constraints for placement in the earliest revisable wave compatible with its direct dependencies and concrete concurrency conflicts.
+Place each such plan in its earliest viable wave unless a specific, evidenced scheduling constraint requires deferral.
+When deferring an otherwise eligible plan, record the plan, the earlier viable wave, and the concrete reason in the existing planning records; reassess the deferral when revising future waves.
+Distinguish plan-level parallelism from execution-environment concurrency limits. Apply an execution limit to wave placement only when it prevents safe same-wave execution, and record it explicitly rather than as a plan dependency or conflict.
+
+Among placements that actually require a choice, prefer lighter cells when the available planning information supports a useful distinction.
+Cell priority and the staircase pattern are not reasons to defer independent eligible plans.
 Do not prescribe a fixed scoring system or a fixed maximum number of active cells.
 
 ## Assess shared-part interference while arranging waves
@@ -62,7 +68,7 @@ Allow independent changes in the same wave when their edits and behavioral contr
 Record a concurrency conflict when a concrete, plausible interference would make simultaneous implementation unsafe, and identify the interaction that justifies the constraint.
 Use a direct dependency instead when one plan requires the established result of another before implementation.
 
-When contention becomes high, keep safe parallelism by skipping conflicting cells or delaying additional cell introduction.
+When evidenced plan-level interference prevents safe co-placement, keep safe parallelism by skipping conflicting cells or delaying additional cell introduction.
 Do not force every active cell to advance in every wave.
 
 ## Require test-evidence planning when fixing a wave
