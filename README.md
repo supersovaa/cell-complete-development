@@ -19,7 +19,7 @@ Install the skill directories you need from [`skills/`](skills/) into the locati
 For loaders that use one skill per directory, install `skills/cell-planning/`, `skills/cross-planning/`, `skills/wave-planning/`, `skills/wave-planning-review/`, and `skills/implementation/` as separate directories, preserving each directory's `SKILL.md`.
 
 These skills extend the [plan-driven skills](https://github.com/supersovaa/plan-driven-implementation/tree/main/skills): use `plan-driven-planning` with cell, cross, and wave planning, `plan-driven-implementation` with wave execution, and `plan-driven-review` for plan-based review.
-Cross-Cell coordination additionally uses [diagonal-progress-planning](https://github.com/supersovaa/diagonal-progress-planning/blob/main/SKILL.md), which owns general cross-target dependencies, coarse diagonal order, projections, and affected-progress revision.
+Install [diagonal-progress-planning](https://github.com/supersovaa/diagonal-progress-planning/blob/main/SKILL.md) alongside `cross-planning` when coordinating multiple Cells. It owns the general cross-target dependencies, coarse diagonal order, projections, and affected-progress revision.
 When fixing a wave for implementation, also make the external [`test-evidence-planning`](https://github.com/supersovaa/requirement-driven-testing/blob/main/skills/planning/SKILL.md) skill available.
 Completion of its required planning results is a condition for **fixing a wave**, not for **starting wave planning**.
 
