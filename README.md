@@ -10,7 +10,7 @@ Skills for implementing systems around concrete domain cells: independently iden
 - [wave-planning-review](skills/wave-planning-review/SKILL.md): diagnose avoidable serialization or costly parallel integration from planned boundaries and observed integration work, and identify the responsible planning or design layer.
 - [cell-complete-implementation](skills/implementation/SKILL.md): execute one fixed wave while preserving plan boundaries, established concurrency constraints, temporary-test rules, and cell completion conditions.
 
-General plan structure, dependency semantics, individual plan execution, and implementation review remain the responsibility of the corresponding plan-driven skills. `wave-planning-review` adds diagnostic review of wave placement, including observed integration work during execution.
+General plan structure, dependency semantics, individual plan execution, and implementation review remain the responsibility of the corresponding plan-driven skills. `wave-planning-review` uses observed integration work to assess future placements and actionable remaining choices.
 Required test cases, expected outcomes, and other test-evidence planning decisions belong to `test-evidence-planning`; wave planning only requires that planning to be complete before fixing a wave.
 
 ## Skill setup
