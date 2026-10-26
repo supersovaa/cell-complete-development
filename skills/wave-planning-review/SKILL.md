@@ -43,6 +43,10 @@ Preserve confirmed concurrency constraints unless a settled redesign removes the
 
 If the observed wave count is justified by required dependencies and genuine conflicts, report that conclusion about serialization and examine parallel-integration effort separately when relevant.
 
+## Before fixing a wave
+
+Review shared contracts and downstream verification of all co-placed plans. Where an evidence-backed earlier integration has materially lower total effort, mark the current placement as requiring revision before fixation. Return the finding to wave planning and review the revised placement. Require clarification of unsettled contract assumptions before fixing the affected plans.
+
 ## Check avoidable parallel-integration effort
 
 For otherwise compatible same-wave placements, examine available evidence of substantive branch synchronization, conflict resolution, consumer-test repair, and integration verification caused by a shared-result change. Distinguish effort caused by co-placement from ordinary baseline updates and unrelated defects. A clean final merge shows successful resolution; preceding changes and tests show the effort needed to reach it.
