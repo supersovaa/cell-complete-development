@@ -36,7 +36,7 @@ Fix only the earliest not-yet-completed wave selected for execution.
 Future wave assignments may be revised until their wave is fixed for implementation.
 Only plans in a fixed wave are eligible for implementation through the cell-complete workflow.
 
-Use staircase-shaped diagonal progress when dependencies or concrete conflicts require staggered placement:
+Use staircase-shaped diagonal progress when dependencies, concrete conflicts, or evidenced integration-effort tradeoffs support staggered placement:
 
 - plans from the same cell may share a wave when no direct dependency or concurrency conflict prevents simultaneous execution;
 - additional cells may enter later waves when at least one of their wave-unassigned plans is eligible for placement;
