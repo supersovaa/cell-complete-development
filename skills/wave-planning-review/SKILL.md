@@ -5,7 +5,7 @@ description: Review future wave placement for avoidable serialization or costly 
 
 # Wave Planning Review
 
-Use this skill after wave planning has produced a complete future wave arrangement for a known set of planned cells. During execution, use it when an unstarted plan or revisable future wave has a concrete alternative placement that could reduce remaining work.
+Use this skill to review a candidate multi-plan wave before it is fixed. Review completed future arrangements as appropriate. During execution, review only an actionable alternative for unstarted work.
 
 This is a diagnostic review.
 A suspicious wave count is evidence to investigate, not proof that the arrangement is invalid.
