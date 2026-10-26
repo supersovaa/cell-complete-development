@@ -1,13 +1,13 @@
 ---
 name: wave-planning-review
-description: Review future wave placement for avoidable serialization or costly parallel integration, and revisit running waves only for actionable remaining placement decisions.
+description: Review wave placements before fixation to detect costly co-placement and guide revisions while preserving justified parallelism.
 ---
 
 # Wave Planning Review
 
 Use this skill to review a candidate multi-plan wave before it is fixed. Review completed future arrangements as appropriate. During execution, review only an actionable alternative for unstarted work.
 
-This is a diagnostic review.
+This review identifies placements accepted for fixation and those requiring revision. It leaves wave assignment to wave planning.
 A suspicious wave count is evidence to investigate, not proof that the arrangement is invalid.
 
 ## Check the wave-count warning threshold
@@ -60,5 +60,5 @@ Report grounded excess integration effort separately from actual dependency or c
 Report the evidence for suspected inefficiency from excessive serialization or parallel integration, whether it points to a planning-layer issue or a possible shared-implementation design concern, and the expected effect of reconsidering the responsible area.
 Ask the user to revisit the identified planning layer or evaluate the shared design as appropriate, rather than silently changing upstream plans or implementation during review.
 
-This skill owns diagnostic review of planned wave arrangements and actionable remaining placement choices during execution.
+This skill owns pre-fixation placement review and diagnosis of actionable remaining placement choices during execution.
 It does not create cell plans, establish cross-cell dependencies, assign waves, or modify the reviewed planning records.
