@@ -73,7 +73,7 @@ A progression requiring staggered placement may look like:
 
 Here A, B, and C are cells, and each numbered item is a cell plan.
 
-Use staircase-shaped diagonal progress when dependencies or concrete conflicts require staggered placement:
+Use staircase-shaped diagonal progress when dependencies, concrete conflicts, or evidenced integration-effort tradeoffs support staggered placement:
 
 - plans from the same cell may share a wave when no direct dependency or concurrency conflict prevents simultaneous execution;
 - additional cells may enter later waves when at least one of their wave-unassigned plans is eligible for placement;
