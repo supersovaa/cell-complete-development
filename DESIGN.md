@@ -89,7 +89,7 @@ Place eligible plans in their earliest viable future wave unless a specific sche
 Dependency semantics, dependency recording, plan state, and plan-readiness semantics belong to the ordinary plan workflow.
 Cell planning establishes intra-cell dependencies; cross planning applies shared diagonal-progress-planning to Cell relationships. Wave planning consumes established dependencies and completes concurrency analysis without changing ordinary dependency semantics.
 
-When a wave is being fixed for implementation, wave planning acts as the coordinating pre-execution gate for that wave.
+When a wave is being fixed for implementation, wave planning acts as the coordinating pre-execution gate for that wave. It requires review of the candidate's shared-contract interactions and rejects materially costly co-placement when an evidence-backed alternative reduces total expected work.
 Before fixing it, use every assigned cell plan's settled completion contract as input to `test-evidence-planning`, or verify that an applicable settled result already exists.
 Do not fix or execute the wave until the required test definitions and material testing decisions produced by `test-evidence-planning` are complete, persisted using repository conventions, and linked from each plan.
 If that gate exposes an unresolved requirement, design ambiguity, invalid plan boundary, dependency change, or concurrency conflict, return it to its owning workflow before fixing the wave.
