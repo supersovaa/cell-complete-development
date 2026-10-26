@@ -1,11 +1,11 @@
 ---
 name: wave-planning-review
-description: Review cell-wave arrangements for avoidable serialization or costly parallel integration, and identify the responsible planning or design layer.
+description: Review future wave placement for avoidable serialization or costly parallel integration, and revisit running waves only for actionable remaining placement decisions.
 ---
 
 # Wave Planning Review
 
-Use this skill after wave planning has produced a complete future wave arrangement for a known set of planned cells, or when actual integration work raises concerns about the efficiency of an existing arrangement.
+Use this skill after wave planning has produced a complete future wave arrangement for a known set of planned cells. During execution, use it when an unstarted plan or revisable future wave has a concrete alternative placement that could reduce remaining work.
 
 This is a diagnostic review.
 A suspicious wave count is evidence to investigate, not proof that the arrangement is invalid.
@@ -45,16 +45,16 @@ If the observed wave count is justified by required dependencies and genuine con
 
 ## Check avoidable parallel-integration effort
 
-For otherwise compatible same-wave placements, examine evidence of substantive repeated branch synchronization, conflict resolution, consumer-test repair, and integration verification caused by a shared-result change. Distinguish work caused by the chosen co-placement from ordinary baseline updates and unrelated defects. A clean final merge shows successful resolution; the preceding changes and tests show the effort needed to reach it.
+For otherwise compatible same-wave placements, examine available evidence of substantive branch synchronization, conflict resolution, consumer-test repair, and integration verification caused by a shared-result change. Distinguish effort caused by co-placement from ordinary baseline updates and unrelated defects. A clean final merge shows successful resolution; preceding changes and tests show the effort needed to reach it.
 
 Compare the observed and remaining effort with an alternative that establishes the shared result in an earlier wave. Include useful progress gained through concurrency, extra waiting and wave-wide verification in the staged alternative, and the number of affected consumers. Shared file counts or a single failed test are prompts to inspect concrete causes.
 
-Report grounded excess integration effort separately from actual dependency or concurrency conflicts. For already fixed or partly completed arrangements, focus proposed placement changes on remaining work and apply the repository's replanning procedure to any fixed-wave changes.
+Report grounded excess integration effort separately from actual dependency or concurrency conflicts. For an already executing wave, propose a placement change only when a concrete unstarted work unit, feasible alternative, and material remaining-work benefit are identified; use the repository's established procedure for changes affecting fixed waves. Otherwise continue integration under the existing plan and use the observed effort when arranging future waves.
 
 ## Keep replanning under user control
 
 Report the evidence for suspected inefficiency from excessive serialization or parallel integration, whether it points to a planning-layer issue or a possible shared-implementation design concern, and the expected effect of reconsidering the responsible area.
 Ask the user to revisit the identified planning layer or evaluate the shared design as appropriate, rather than silently changing upstream plans or implementation during review.
 
-This skill owns only diagnostic review of completed or already executing wave arrangements.
+This skill owns diagnostic review of planned wave arrangements and actionable remaining placement choices during execution.
 It does not create cell plans, establish cross-cell dependencies, assign waves, or modify the reviewed planning records.
