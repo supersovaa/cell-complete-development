@@ -1,6 +1,6 @@
 ---
 name: wave-planning
-description: Arrange eligible cell plans into waves using dependencies, concurrency analysis, and grounded integration-effort tradeoffs, then require settled test-evidence planning before fixing a wave.
+description: Arrange eligible cell plans into waves using dependencies, concurrency analysis, and integration-effort comparison, and reject costly co-placement before wave fixation.
 ---
 
 # Wave Planning
@@ -75,9 +75,17 @@ Keep integration-effort choices distinct from direct result dependencies and con
 
 Record the compared placements, evidence, expected tradeoff, and selected order in the existing planning record. Apply the comparison to affected plans while unrelated eligible work continues.
 
+## Review co-placement before fixing a wave
+
+Before fixing a candidate wave with multiple plans, examine their settled shared contracts, execution paths, intended changes, and verification assumptions together. Review likely consumer adaptations and integration verification even when each plan can independently complete and no concurrency conflict has been recorded. Apply `wave-planning-review` to this candidate before fixation; the full arrangement of unrelated future waves is not required.
+
+When the grounded comparison identifies material avoidable integration work from co-placement and a feasible lower-effort staged placement, reject the proposed wave arrangement. Return the affected plan assignments to wave planning, establish the safer sequence in the existing planning record, and review the revised candidate before fixing it.
+
+When a concrete shared-contract interaction lacks settled information needed to assess the impact, return the affected plans to the owning planning workflow for clarification and keep them unassigned until the decision is grounded. Complete and fix unaffected eligible work independently. Retain supported co-placement when the comparison establishes compatible contracts and no material advantage for staging.
+
 ## Require test-evidence planning when fixing a wave
 
-Before fixing a wave for implementation, inspect every cell plan assigned to that wave.
+Before fixing a wave for implementation, inspect every cell plan assigned to that wave and confirm that the co-placement review has accepted the current candidate.
 Use each plan's settled completion contract as the bounded input to `test-evidence-planning`, or verify that an applicable settled test-evidence planning result already exists.
 
 Require the resulting test definitions and material testing decisions to be complete, recorded using repository conventions, and linked from each plan before fixing the wave.
@@ -89,7 +97,7 @@ Do not fix the wave or begin its implementation while required test-evidence pla
 If test-evidence planning exposes an unresolved requirement or design ambiguity, return that issue to its owning workflow.
 If the gate exposes an invalid plan boundary, dependency change, or concurrency conflict, return that issue to its owning planning workflow before fixing the wave.
 
-This skill owns plan-level concurrency completion, evidence-based placement tradeoffs, wave assignment, and the pre-execution gate that requires completed `test-evidence-planning` for a fixed wave.
+This skill owns plan-level concurrency completion, evidence-based placement tradeoffs, wave assignment, and the pre-execution gate that requires accepted co-placement review and completed `test-evidence-planning`.
 Cell-local decomposition and cell-completion criteria belong to cell planning.
 Cross-cell result dependencies and coarse cell implementation order, when coordination across cells is needed, belong to cross planning. Completing a separate cross-planning pass is not a gate for unrelated wave arrangement.
 Required test cases and expected outcomes belong to `test-evidence-planning`.
