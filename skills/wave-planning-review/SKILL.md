@@ -41,7 +41,7 @@ When genuine concurrency interference comes from independently meaningful respon
 Recommend evaluating the shared concept through established meaning and whole-path simplification, referring to `concept-introduction-threshold` when available without requiring it to complete this review.
 Preserve confirmed concurrency constraints unless a settled redesign removes their cause.
 
-If the observed wave count is justified by required dependencies and genuine conflicts, report that conclusion without requiring replanning.
+If the observed wave count is justified by required dependencies and genuine conflicts, report that conclusion about serialization and examine parallel-integration effort separately when relevant.
 
 ## Check avoidable parallel-integration effort
 
