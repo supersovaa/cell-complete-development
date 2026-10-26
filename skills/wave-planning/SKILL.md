@@ -1,6 +1,6 @@
 ---
 name: wave-planning
-description: Arrange eligible cell plans into current and future waves using established dependencies and plan-level concurrency analysis, then require settled test-evidence planning before fixing a wave.
+description: Arrange eligible cell plans into waves using dependencies, concurrency analysis, and grounded integration-effort tradeoffs, then require settled test-evidence planning before fixing a wave.
 ---
 
 # Wave Planning
@@ -46,7 +46,7 @@ Use staircase-shaped diagonal progress when dependencies or concrete conflicts r
 
 Use ordinary plan state and dependency results as inputs to wave construction rather than redefining plan readiness or dependency semantics here.
 
-Place eligible plans in the earliest revisable wave supported by their dependencies and concrete concurrency conflicts. Defer an otherwise placeable plan only for a specific, evidenced constraint recorded in existing planning records; keep execution-capacity limits distinct from plan conflicts.
+Place eligible plans in the earliest revisable wave supported by their dependencies and concrete concurrency conflicts. Defer an otherwise placeable plan only for a specific, evidenced constraint or a material integration-effort benefit established by the comparison below; record the reason in existing planning records and keep execution-capacity limits distinct from plan conflicts.
 Among placements that require a choice, prefer lighter cells when useful, without a fixed scoring system or maximum number of active cells.
 
 ## Assess shared-part interference while arranging waves
@@ -65,6 +65,16 @@ Use a direct dependency instead when one plan requires the established result of
 When concrete concurrency conflicts prevent co-placement, keep safe parallelism by skipping conflicting cells or delaying additional cell introduction.
 Do not force every active cell to advance in every wave.
 
+## Compare integration effort for otherwise safe placements
+
+When plans are independently completable in one wave but a planned change to a shared contract or execution path would require several other plans to adapt, compare co-placement with establishing the shared result in an earlier wave.
+
+Ground both alternatives in settled plan boundaries and repository facts. Identify the producing and consuming plans, the affected contract or behavior, and likely work to synchronize branches, reconcile edits, adapt consumers and their test expectations, and rerun integration verification. Balance those costs against useful parallel progress, added waiting, and extra wave or integration work under the staged alternative.
+
+Keep integration-effort choices distinct from direct result dependencies and concurrency conflicts. Select a later revisable wave for an otherwise eligible plan when the concrete comparison supports a material net reduction in work; otherwise retain its earliest supported placement. Shared file counts and a final conflict-free merge are only partial evidence of the effort incurred.
+
+Record the compared placements, evidence, expected tradeoff, and selected order in the existing planning record. Apply the comparison to affected plans while unrelated eligible work continues.
+
 ## Require test-evidence planning when fixing a wave
 
 Before fixing a wave for implementation, inspect every cell plan assigned to that wave.
@@ -79,7 +89,7 @@ Do not fix the wave or begin its implementation while required test-evidence pla
 If test-evidence planning exposes an unresolved requirement or design ambiguity, return that issue to its owning workflow.
 If the gate exposes an invalid plan boundary, dependency change, or concurrency conflict, return that issue to its owning planning workflow before fixing the wave.
 
-This skill owns plan-level concurrency completion, wave assignment, and the pre-execution gate that requires completed `test-evidence-planning` for a fixed wave.
+This skill owns plan-level concurrency completion, evidence-based placement tradeoffs, wave assignment, and the pre-execution gate that requires completed `test-evidence-planning` for a fixed wave.
 Cell-local decomposition and cell-completion criteria belong to cell planning.
 Cross-cell result dependencies and coarse cell implementation order, when coordination across cells is needed, belong to cross planning. Completing a separate cross-planning pass is not a gate for unrelated wave arrangement.
 Required test cases and expected outcomes belong to `test-evidence-planning`.
