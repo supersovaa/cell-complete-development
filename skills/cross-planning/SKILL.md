@@ -14,7 +14,7 @@ Use ordinary `plan-driven-planning` for dependency semantics and authoritative p
 
 Keep every Cell plan's authoritative membership in exactly one Cell.
 A partial result in one Cell may serve another Cell before its owning Cell completes.
-Link the dependent plan to the actual providing plan result; shared implementation remains subordinate to the Cell plan that establishes it.
+Apply ordinary planning's distinction between pending producing plans and results already established on the relevant base branch. Shared implementation remains subordinate to the Cell plan that establishes it.
 
 Record confirmed cross-Cell direct dependencies in the existing implementation index.
 Keep the coarse, revisable order of Cells in an appropriate existing Markdown planning document, distinct from direct dependencies.
