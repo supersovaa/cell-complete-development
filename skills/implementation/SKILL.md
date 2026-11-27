@@ -1,15 +1,11 @@
 ---
 name: cell-complete-implementation
-description: Execute one fixed cell-complete wave by running its cell plans in parallel where allowed, honoring plan-level concurrency constraints, temporary-test rules, and cell completion boundaries.
+description: Execute one fixed wave of cell plans, running plans in parallel where their constraints allow. Apply temporary-test and cell-completion rules.
 ---
 
 # Cell-Complete Implementation
 
-Use this skill to execute one already fixed cell-complete wave.
-
-Use the repository's ordinary plan-driven implementation rules for every cell plan in the wave.
-Those rules own each plan's fixed execution boundary, result recording, completion audit, and replan-required handling.
-This skill adds wave orchestration and cell-specific implementation rules.
+Execute one already fixed wave. Apply ordinary plan-driven implementation to each cell plan for its execution boundary, result record, completion audit, and replan-required handling. The rules below govern wave orchestration and cell completion.
 
 ## Execute one wave
 
