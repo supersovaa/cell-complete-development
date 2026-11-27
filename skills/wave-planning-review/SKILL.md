@@ -1,14 +1,11 @@
 ---
 name: wave-planning-review
-description: Review a completed cell-wave arrangement for suspicious serialization and identify whether its cause lies in planning constraints or tightly coupled shared implementation.
+description: Review a completed cell-wave schedule for avoidable serialization and trace it to planning constraints or shared implementation.
 ---
 
 # Wave Planning Review
 
-Use this skill after wave planning has produced a complete future wave arrangement for a known set of planned cells.
-
-This is a diagnostic review.
-A suspicious wave count is evidence to investigate, not proof that the arrangement is invalid.
+Review the complete future wave arrangement for a known set of planned cells. A suspicious wave count triggers investigation. Required dependencies or concurrency conflicts can justify the count.
 
 ## Check the wave-count warning threshold
 
