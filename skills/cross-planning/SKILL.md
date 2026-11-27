@@ -1,14 +1,11 @@
 ---
 name: cross-planning
-description: Coordinate dependencies and coarse progress between planned Cells using the shared diagonal-progress-planning workflow, without assigning waves.
+description: Coordinate partial results and dependencies across planned Cells using diagonal progress planning. Leave wave assignment to wave planning.
 ---
 
 # Cross Planning
 
-Use this skill when implementation progress requires coordination across multiple planned Cells.
-
-Apply `diagonal-progress-planning` to the Cell partial results established by `cell-planning`.
-Use ordinary `plan-driven-planning` for dependency semantics and authoritative planning records.
+For coordination across planned Cells, start with the partial results from `cell-planning`. Apply `diagonal-progress-planning` to those results and `plan-driven-planning` for dependency semantics and authoritative planning records.
 
 ## Apply Cell boundaries
 
