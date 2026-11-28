@@ -1,11 +1,11 @@
 ---
 name: cell-planning
-description: Break one concrete domain cell into implementation plans and record its direct internal dependencies. Leave wave assignment to wave planning.
+description: Use when planning implementation of one concrete domain cell. Own the cell-local decomposition and dependencies.
 ---
 
 # Cell Planning
 
-Plan one concrete domain entity that the repository treats as a cell. Keep scheduling outside the cell-local plan.
+Identify the concrete domain entity that forms the cell. When decomposing it, record only direct dependencies within the cell and leave each plan unassigned to a wave.
 
 Apply the repository’s ordinary plan-driven planning rules for plan structure, dependencies, readiness, durable state, and recording concurrency conflicts.
 
