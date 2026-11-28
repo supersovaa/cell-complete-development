@@ -1,11 +1,11 @@
 ---
 name: cell-complete-implementation
-description: Execute one fixed wave of cell plans, running plans in parallel where their constraints allow. Apply temporary-test and cell-completion rules.
+description: Use when asked to execute a wave of cell implementation plans. Coordinate execution within the selected wave.
 ---
 
 # Cell-Complete Implementation
 
-Execute one already fixed wave. Apply ordinary plan-driven implementation to each cell plan for its execution boundary, result record, completion audit, and replan-required handling. The rules below govern wave orchestration and cell completion.
+Execute only an already fixed wave. Apply ordinary plan-driven implementation to each cell plan for its execution boundary, result record, completion audit, and replan-required handling. Apply wave and cell rules when scheduling plans, testing incomplete cells, or completing a cell.
 
 ## Execute one wave
 
