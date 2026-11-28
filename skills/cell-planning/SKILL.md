@@ -1,15 +1,13 @@
 ---
 name: cell-planning
-description: Plan one concrete domain cell at a time by decomposing it into implementation plans and recording only the direct dependencies within that cell, leaving every resulting plan unassigned to a wave.
+description: Use when planning implementation of one concrete domain cell. Own the cell-local decomposition and dependencies.
 ---
 
 # Cell Planning
 
-Use this skill when a repository defines concrete domain entities as cells and one cell needs to be decomposed without performing repository-wide scheduling.
+Identify the concrete domain entity that forms the cell. When decomposing it, record only direct dependencies within the cell and leave each plan unassigned to a wave.
 
-Use this skill together with the repository's ordinary plan-driven planning rules.
-Those rules own plan structure, dependency semantics, plan-readiness semantics, durable state, and general concurrency-conflict recording.
-This skill owns the cell-local planning phase only.
+Apply the repository’s ordinary plan-driven planning rules for plan structure, dependencies, readiness, durable state, and recording concurrency conflicts.
 
 ## Establish the cell boundary
 
