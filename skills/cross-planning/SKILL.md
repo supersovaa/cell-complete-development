@@ -5,7 +5,7 @@ description: Use when coordinating implementation plans across multiple Cells. O
 
 # Cross Planning
 
-When a partial result from one planned Cell affects another, apply `diagonal-progress-planning` to the results from `cell-planning`. Use `plan-driven-planning` for dependency semantics and authoritative records.
+Use `diagonal-progress-planning` to coordinate the partial results from `cell-planning`. When one Cell requires a result from another, use `plan-driven-planning` to distinguish an established result from a pending dependency and record it in the appropriate planning record.
 
 ## Apply Cell boundaries
 
