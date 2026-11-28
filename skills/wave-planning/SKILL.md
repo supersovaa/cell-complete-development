@@ -1,6 +1,6 @@
 ---
 name: wave-planning
-description: Arrange eligible cell plans into waves by dependency and concurrency constraints. Check test-evidence planning before fixing a wave.
+description: Arrange eligible cell plans into waves by dependency and concurrency constraints. Fix a wave only after required test-evidence planning is complete for every cell plan in that wave.
 ---
 
 # Wave Planning
