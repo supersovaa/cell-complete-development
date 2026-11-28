@@ -1,11 +1,11 @@
 ---
 name: wave-planning
-description: Arrange eligible cell plans into current and future waves using established dependencies and plan-level concurrency analysis, then require settled test-evidence planning before fixing a wave.
+description: Arrange eligible cell plans into waves by dependency and concurrency constraints. Fix a wave only after required test-evidence planning is complete for every cell plan in that wave.
 ---
 
 # Wave Planning
 
-Use this skill when one or more cell plans need wave arrangement or a wave needs fixing. Use available cross-planning findings where relevant; cross planning is not a prerequisite for a single cell or unrelated eligible plans.
+Arrange or fix waves for one or more cell plans. Use cross-planning findings where relevant. A single cell or unrelated eligible plans can go directly to wave planning.
 
 Use this skill together with the repository's ordinary plan-driven planning rules.
 Those rules own dependency semantics, dependency recording, plan state, plan-readiness semantics, durable state, and general concurrency-conflict recording.
