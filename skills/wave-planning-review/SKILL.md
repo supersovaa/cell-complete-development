@@ -1,11 +1,11 @@
 ---
 name: wave-planning-review
-description: Review a completed cell-wave schedule for avoidable serialization and trace it to planning constraints or shared implementation.
+description: Use when reviewing the wave arrangement for a set of planned cells. Diagnose possible avoidable serialization.
 ---
 
 # Wave Planning Review
 
-Review the complete future wave arrangement for a known set of planned cells. A suspicious wave count triggers investigation. Required dependencies or concurrency conflicts can justify the count.
+Review the complete future arrangement for the known set of planned cells. Investigate a suspicious count or serialization pattern when it appears. Required dependencies or concurrency conflicts can justify the arrangement.
 
 ## Check the wave-count warning threshold
 
